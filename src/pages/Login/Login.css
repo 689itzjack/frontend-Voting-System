@@ -1,0 +1,10 @@
+.loginContainer{
+    display: flex; /*encierra todo lo que contiene el container <div> con el atributo "className=loginContainer" en un bloque*/
+    flex-direction: column;/*Elcontenido del bloque dentro del container(dentro del flex) se pone en forma de columna*/
+    justify-content: center;/*todo el contenido dentro del flex se coloca en el centro de la pantalla*/
+    align-items: center;/*cada item dentro del flex se coloca en el centro de la pantalla*/
+}
+img{
+    width: 150px;
+    border-radius: 30px;
+}
