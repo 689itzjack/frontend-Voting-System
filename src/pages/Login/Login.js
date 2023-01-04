@@ -54,12 +54,12 @@ const Login = () => {
             name:'passwordUser',
             placeHolder: 'Please type a password',
             type:'password'
-        }}
+        }} 
         handlerCh = {handlerChange}/>
         <br/>
         <button onClick={handlerClickAccess}>Accessing</button>
         <br/>
-        <img src= {photoAzr} alt="Azrieli photo"/>
+        <img src= {photoAzr} alt="Azrieli College photo"/>
     </div>
 };
 
