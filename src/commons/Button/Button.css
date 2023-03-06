@@ -1,0 +1,21 @@
+.button-regular{
+    width: 90px;
+    margin-right: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border-color: white;
+    background-color: black;
+    color: red;
+    cursor:pointer;
+}
+
+.loginButton, .registerButton{
+    width: 20%;
+    height: 30px;
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    background-color: black;
+    cursor:pointer;
+}
+

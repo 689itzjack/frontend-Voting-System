@@ -1,0 +1,22 @@
+.nav-page{
+    height: 30px;
+    background-color: rgba(181, 0, 0, 0.809);
+    padding: 5px;
+}
+.nav-page {
+    display: flex;
+    justify-content: space-between;
+}
+.buttons-private{
+    float: right;
+}
+/* button{
+    width: 90px;
+    margin-right: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border-color: white;
+    background-color: black;
+    color: red;
+ } */
+

@@ -1,0 +1,12 @@
+.registerForm-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    margin-left: 30px;
+    color: crimson;
+}
+
