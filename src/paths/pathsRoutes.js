@@ -1,5 +1,5 @@
 export const LOGIN = '/login';
-export const HOME = '/';
-export const COURSE = '/course/:idCourse';
+export const HOME = '/home';
+export const COURSE = '/home/course/:idCourse';
 export const REGISTER = '/register';
-export const LOGOUT = '/home/logout';
+export const LOGOUT = '/login';
