@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Login.css';
 import './../../paths/pathsRoutes'
-import { Title } from "./components/Title/Title";
+import { Title } from "../../commons/Title/Title";
 import { Label } from "../../commons/Label/Label";
 import { Input } from "../../commons/Input/Input";
 import photoAzr from "./../../assets/images/azrieli.png";
@@ -68,7 +68,6 @@ const Login = () => {
                     state: {
                         logedIn: true,
                         user,
-                        pass,
                     }
                 });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
 
@@ -115,9 +114,9 @@ const Login = () => {
     
     return <div className = "loginContainer">
         <br/>
-        <Title textTitle = 'Voting System Azrieli College'/>
+        <Title textTitle = 'Voting System Azrieli College' classType='titleLabel'/>
         <br/>
-        <Title textTitle = 'Welcome'/>
+        <Title textTitle = 'Welcome' classType='titleLabel'/>
         {hasError && <label className="label-pass-error"><br/>The password or user are incorret.</label>}
         <br/>
         <br/>

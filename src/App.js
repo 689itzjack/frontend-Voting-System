@@ -3,7 +3,7 @@ import './App.css';
 import Login from "./pages/Login/Login";
 
 import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
-import { COURSE, HOME, LOGIN, LOGOUT, REGISTER } from "./paths/pathsRoutes";
+import { COURSE, HOME, HOME_ADMIN, HOME_STUDENT, LOGIN, LOGOUT, REGISTER } from "./paths/pathsRoutes";
 import { Home } from "./pages/Home/Home";
 import { Course } from "./pages/Course/Course";
 //import { element } from "prop-types";
@@ -14,23 +14,20 @@ import { Errorpage } from "./commons/pageError/Errorpage";
 import firebaseApp from './firebase/credentials';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { DBProvider } from "./Context/UserFromDB";
 
 
 export function App(){
 
     const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
-    const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
+    //const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
     const [userAuth, setUserAuth] = useState(null);//saves if an user is logedin
-    const [userFromDB, setUserFromDB] = useState(null);
+    //const [userFromDB, setUserFromDB] = useState(null);
     //const [userLoged, setUserLoged] = useState(false);
-
 
     // function getIfLogedUsr(){
     //     return localStorage.getItem('isLoged');
     // }
-
-    
-
 
     onAuthStateChanged(auth, (userInFirebase) => {
     
@@ -68,21 +65,21 @@ export function App(){
         <BrowserRouter>
             <Routes>
 
-                <Route path="/" element = {<Navbar/>} >
-                    
-                    <Route path = {LOGIN} element={<Login/>} />
-                    <Route path={REGISTER} element={<Register/>} />
+                    <Route path="/" element = {<DBProvider><Navbar/></DBProvider>} >
 
-                    {(userAuth) ?
-                        <Route exact path={HOME} element = {<Home dataUser={userAuth}/>}  >
-                            <Route path={COURSE} element = {<Course/>}  />
-                        </Route>
-                        :
-                        <Route path={HOME} element={<Navigate to={LOGIN}/>} ></Route>
-                    }
-                    
-                </Route>
-                <Route path="*" element={<Errorpage/>} /> 
+                        <Route path = {LOGIN} element={<Login/>} />
+                        <Route path={REGISTER} element={<Register/>} />
+
+                        {(userAuth) ?
+                            <Route exact path={HOME} element = {<Home dataUser={userAuth}/>}>
+                                <Route path={COURSE} element = {<Course />}  />
+                            </Route>
+                            :
+                            <Route path={HOME} element={<Navigate to={LOGIN}/>} ></Route>
+                        }
+                    </Route>
+                    <Route path="*" element={<Errorpage/>} /> 
+                
             </Routes>
         </BrowserRouter>
         

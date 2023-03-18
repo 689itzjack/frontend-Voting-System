@@ -1,0 +1,10 @@
+.list-user{
+
+    margin: 20px;
+    padding: 10px;
+    border-radius: 6px;
+    border-style: groove;
+    border-color: rgba(181, 0, 0, 0.809);
+    background-color: rgb(82, 82, 91);
+    font-weight: 800;
+}

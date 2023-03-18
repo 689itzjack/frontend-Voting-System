@@ -6,6 +6,9 @@ import firebaseApp from './../../firebase/credentials';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 import './Navbar.css'
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import UserFromDB from '../../Context/UserFromDB';
 
 export const Navbar = () => {
 
@@ -24,6 +27,9 @@ export const Navbar = () => {
 
   const logOut = () => {
     setcurrPage("Login");
+
+
+
     signOut(auth);
     navigate(LOGIN,{
       replace:true, 
@@ -31,15 +37,25 @@ export const Navbar = () => {
         logedIn: false,
       }
     });
-    
-    
   }
 
   const {state} = useLocation();
   const [currPage, setcurrPage] = useState("Login");
+
+
+
+  
+  //let varSpan = state?.user;
   //const [userLogged, setUserLogged] = useState(false)
   //console.log("the user is logged in??" + state.logedIn);
   //console.log("the user is logged in??" , state)
+
+  // useEffect(() => {
+  //   varSpan = state?.user;
+  // }, [varSpan]);
+  const {userFromDB} = useContext(UserFromDB);
+
+  console.log("THE DATA FROM THE USECONTEXT IS   "+ userFromDB);
 
   return (
     <>
@@ -48,7 +64,7 @@ export const Navbar = () => {
             {
               state?.logedIn ? 
               <div className='buttons-private'>
-                <span> {state?.user} </span>
+                <span> {userFromDB?.name} </span>
                 <Button text="Logout" classButton="button-regular" handlerFunction={logOut}/>
               </div>
               :
@@ -67,4 +83,3 @@ export const Navbar = () => {
     </>
   )
 }
-//currPage === "Login"

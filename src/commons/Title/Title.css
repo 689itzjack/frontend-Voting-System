@@ -1,5 +1,23 @@
 .titleLabel{
-    /*podemos hacer que un label o mas esten centrados en medio de la pantalla de 2 formas
+    
+    color: rgba(255, 29, 29, 0.692);
+    font-weight: bold;
+    font-size:1.5rem;
+    font-family: monospace;
+
+}
+
+.title-Admin{
+    color: rgba(0, 0, 0, 0.692);
+    font-weight: bold;
+    font-size:2rem;
+    font-family: monospace;
+    margin-left: -170px;
+
+}
+
+
+/*podemos hacer que un label o mas esten centrados en medio de la pantalla de 2 formas
     la primera: poniendolos dentro de un container como un <div></div> y asignandole una clase al div con el estilo "text-align: center;" para cntrarlo
 
 .titleContainer{
@@ -11,12 +29,3 @@
     la segunda: poniendo a todos los tags labelen una clase comun, poniendo el codigo sigiente: 
 
     */
-    color: rgba(255, 29, 29, 0.692);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size:1.5rem;
-    font-family: monospace;
-
-}

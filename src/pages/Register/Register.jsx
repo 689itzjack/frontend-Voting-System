@@ -75,7 +75,7 @@ export const Register = () => {
     
     const docRef = doc(firestore, `Users/${currUser.user.uid}`);//contains the specific document from firestore wher we saved the data
     await setDoc(docRef, {name: values.studentName,secName: values.studentSurName, email: values.studentEmail, phone: values.studentPhone,
-    adMeta: values.addressMetamask,pass: values.password, rol: "student" });//here we write the data of the user in the database  
+    adMeta: values.addressMetamask,pass: values.password, rol: "admin" });//here we write the data of the user in the database  
     signOut(auth);
   }
     

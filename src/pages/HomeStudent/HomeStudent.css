@@ -1,0 +1,10 @@
+.page-student{
+    display: flex;
+}
+
+aside{
+    width: 30%;
+    height: 100%;
+    background-color: black;    
+    border-right: solid rgba(181, 0, 0, 0.809);
+}

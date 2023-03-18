@@ -1,15 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation, Switch } from 'react-router-dom';
 import firebaseApp from './../../firebase/credentials'
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-
 import './Home1.css';
 import { useEffect } from 'react';
+import { HomeAdmin } from '../HomeAdmin/HomeAdmin';
+import { HomeStudent } from '../HomeStudent/HomeStudent';
+import { ADMIN, COURSE, STUDENT } from '../../paths/pathsRoutes';
+import { Course } from '../Course/Course';
 
 export const Home = ({dataUser}) => {
 
-  const [typeUser, setTypeUser] = useState(dataUser.rol);
   const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
   const [userFromDB, setUserFromDB] = useState(null);
   const {state} = useLocation();
@@ -58,39 +60,61 @@ export const Home = ({dataUser}) => {
   }
 
   useEffect(() => {
-    readDataUserFromDB(dataUser.uid)
+    readDataUserFromDB(dataUser.uid);
   },[]);
-    // readUserDataFromDB(userInFirebase.uid).then((dataUserReturn) => {
-    //   const {name, secName, email, phone, adMeta, pass, rol} = dataUserReturn;
-    //   const userAutenticated = {
-    //       uidUser: userInFirebase.uid,
-    //       name: name, 
-    //       secName: secName,
-    //       email: email,
-    //       phone: phone,
-    //       adMeta: adMeta,
-    //       pass: pass,
-    //       rol: rol,
-    //   };
-    //       setUserFromDB(userAutenticated);
-    //       //console.log("THE DATA SAVED IN THE DB IS " + userAutenticated.secName);///////////////////////////////////////////////////////////
-    //   }).catch((error) => { 
-    //     console.log(error) 
-    // });
-    //setUserAuth(userInFirebase);
+   
+
 
   return (
     <div className='home-style'>
-      
-      {userFromDB ? <p>THE DATA USER IS: {userFromDB.name} {userFromDB.phone} {userFromDB.rol} </p>: <p>LOADING DATA...</p>}
 
+      {/* <Routes>
+       
+          <Route path={ADMIN} element={<HomeAdmin dataUser = {userFromDB}/>} />
+          <Route path={STUDENT} element={<HomeStudent dataUser = {userFromDB}/>} />
+          <Route path={COURSE} element = {<Course />}  />
+      </Routes> */}
+
+      {(userFromDB?.rol === "admin") ?
+        <HomeAdmin dataUser = {userFromDB}/>  : <HomeStudent dataUser = {userFromDB}/>
+      }
     </div>
+    
+
     
   );
 };
 
 
+
+
+
+{/*
+ {(userFromDB?.rol === "admin") && <HomeAdmin dataUser = {userFromDB}/> }
+
+
+*{userFromDB ? <p>THE DATA USER IS: {userFromDB.name} {userFromDB.phone} {userFromDB.rol} </p>: <p>LOADING DATA...</p>}
+ */}
+
 {/* <div className='home-style'>Home
   <Outlet/>
 </div> */}
-    
+{ // readUserDataFromDB(userInFirebase.uid).then((dataUserReturn) => {
+  //   const {name, secName, email, phone, adMeta, pass, rol} = dataUserReturn;
+  //   const userAutenticated = {
+  //       uidUser: userInFirebase.uid,
+  //       name: name, 
+  //       secName: secName,
+  //       email: email,
+  //       phone: phone,
+  //       adMeta: adMeta,
+  //       pass: pass,
+  //       rol: rol,
+  //   };
+  //       setUserFromDB(userAutenticated);
+  //       //console.log("THE DATA SAVED IN THE DB IS " + userAutenticated.secName);///////////////////////////////////////////////////////////
+  //   }).catch((error) => { 
+  //     console.log(error) 
+  // });
+  //setUserAuth(userInFirebase);
+}

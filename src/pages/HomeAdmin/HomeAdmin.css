@@ -1,0 +1,25 @@
+.page-admin{
+    display: flex;
+}
+.container-list{
+    border: 10px;
+    border-color: black;
+}
+
+aside{
+    width: 30%;
+    height: 100%;
+    background-color: black;    
+    border-right: solid rgba(181, 0, 0, 0.809);
+
+}
+aside h1{
+    color: white;
+}
+.main-admin{
+    margin: 0 auto;
+}
+.main-admin img{
+    width: 300px;
+}
+
