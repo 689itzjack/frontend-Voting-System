@@ -1,5 +1,9 @@
 .page-admin{
     display: flex;
+    height: 100%;
+    background-color: rgb(82, 82, 91);
+    margin: 0px;
+    padding: 0px;
 }
 .container-list{
     border: 10px;

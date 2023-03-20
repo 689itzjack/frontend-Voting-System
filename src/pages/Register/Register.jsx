@@ -43,7 +43,7 @@ export const Register = () => {
     registerUser();
     //console.log(isLoged);////////////////////////////////////////////////////
     //setLocalStorage();
-    navigate(HOME, {
+    navigate(LOGIN, {
       replace: true,
       state: {
         logedIn: false,

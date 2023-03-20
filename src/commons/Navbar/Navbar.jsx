@@ -55,7 +55,7 @@ export const Navbar = () => {
   // }, [varSpan]);
   const {userFromDB} = useContext(UserFromDB);
 
-  console.log("THE DATA FROM THE USECONTEXT IS   "+ userFromDB);
+  //console.log("THE DATA FROM THE USECONTEXT IS   "+ userFromDB);
 
   return (
     <>

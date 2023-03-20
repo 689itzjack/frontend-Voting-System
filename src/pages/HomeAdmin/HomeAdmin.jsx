@@ -7,18 +7,21 @@ import { Title } from '../../commons/Title/Title';
 import votingPhoto from '../../assets/images/Picture1.png'
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import UserFromDB from '../../Context/UserFromDB';
 
 
-export const HomeAdmin = ( {dataUser} ) => {
+export const HomeAdmin = (  ) => {
 
+    const {userFromDB} = useContext(UserFromDB);
     
   
   return (
     <div className='page-admin'>
         <aside>
-            <h1>Hi {dataUser?.name}!<br/><br/> Welcome to the voting system</h1>
+            <h1>Hi {userFromDB?.name}!<br/><br/> Welcome to the voting system</h1>
             <div className='container-list'>
-                <Lista adminData={dataUser}/>
+                <Lista adminData={userFromDB}/>
             </div>
         </aside>
         <main className='main-admin'>
