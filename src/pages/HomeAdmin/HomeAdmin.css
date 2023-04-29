@@ -1,18 +1,18 @@
 .page-admin{
-    display: flex;
-    height: 100%;
+    display:flex;
+    width: 100%;
     background-color: rgb(82, 82, 91);
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 .container-list{
     border: 10px;
     border-color: black;
 }
 
-aside{
+.page-admin aside{
     width: 30%;
-    height: 100%;
+    height: auto;
     background-color: black;    
     border-right: solid rgba(181, 0, 0, 0.809);
 
@@ -20,10 +20,5 @@ aside{
 aside h1{
     color: white;
 }
-.main-admin{
-    margin: 0 auto;
-}
-.main-admin img{
-    width: 300px;
-}
+
 

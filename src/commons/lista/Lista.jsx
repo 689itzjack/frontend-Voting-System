@@ -6,7 +6,7 @@ export const Lista = ({adminData}) => {
   return (
     <div className='list-user'>
         
-        <span>Student Name: {adminData?.name}</span>
+        <span>Name: {adminData?.name}</span>
         <br/><br/>
         <span>Surname: {adminData?.secName}</span>
         <br/><br/>
@@ -14,7 +14,7 @@ export const Lista = ({adminData}) => {
         <br/><br/>
         <span>Phone Number: {adminData?.phone}</span>
         <br/><br/>
-        <span>Metamask Account: <br/>{adminData?.adMeta}</span>
+        <span>Metamask Account: <br/><h6>{adminData?.adMeta}</h6></span>
     </div>
   )
 }

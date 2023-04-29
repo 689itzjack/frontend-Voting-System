@@ -1,0 +1,10 @@
+
+input::placeholder{
+    color: black;
+}
+.admin-addCourse{
+    width: 400px;
+    height: 35px;
+    border-radius: 10px;
+    border-color: rgba(181, 0, 0, 0.809);
+}

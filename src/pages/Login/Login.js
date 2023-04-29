@@ -31,48 +31,13 @@ const Login = () => {
     
     // const [userAuthenticatedCurr, setuserAuthenticatedCurr] = useState(null);
     // const [userAuthenticatedLast, setuserAuthenticatedLast] = useState(null);
-    const [userAuth, setUserAuth] = useState(null);
-    const [authPassed, setauthPassed] = useState(false);
-    const [theRol, settheRol] = useState("");
+    // const [userAuth, setUserAuth] = useState(null);
+    // const [authPassed, setauthPassed] = useState(false);
+    // const [theRol, settheRol] = useState("");
 
     //const {userRol} = useContext(GetUserRol);
-//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-    
-
-    async function readUserDataFromDB(uidUser) {
-        //this function will read the user data fro the data base firestore
-
-        const refDoc = doc(firestore, `/Users/${uidUser}`); //we are obtaining the reference of the document according the specific user in firestore service
-        const userDocEncrypted = await getDoc(refDoc); //we obtained the specific document of the user requiring the document but in a encrypted mode
-        const userUncryptedData = userDocEncrypted.data();
-        settheRol(userUncryptedData.rol);
-        const dataUserReturn = {
-          rol: userUncryptedData.rol,
-        };
-        //console.log("THE DATA UNCRYPTED IN THE APP FILE IS (LINE 59): " + dataUserReturn.rol); ////////////////////////////////////
-        return dataUserReturn;
-      }
-
-      function readDataUserFromDB(uidUSER) {
-        readUserDataFromDB(uidUSER)
-          .then((dataUserReturn) => {
-            return dataUserReturn;
-            //console.log("THE DATA SAVED IN THE DB IS " + userAutenticated.secName);///////////////////////////////////////////////////////////
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-
-      
-
-    
     // const {state} = useLocation();
-    // console.log("THIS IS THE STATE",  state);///////////////////////////////////
-    // console.log("The student name is:" + state.values.studentName)
-    //console.log("The student Surname is:" + state.values.studentSurName)
-
+    
     function handlerChange(name,value){//we will use on HOOKS
         if(name === "User"){//if the name of the Input is User
             setUser(value);
@@ -96,39 +61,13 @@ const Login = () => {
 
             signInWithEmailAndPassword(auth, params.user, params.pass).then((userCurrent) => {
                
-                // readDataUserFromDB(userCurrent.user.uid);
-                setUserAuth(userCurrent.user.uid)
-                setauthPassed(true);
-
-                
-                //console.log("THEEEE ROL OF THE USER AUTHENTICATED IS (LINE 97): "+userCurrent.user.uid);
-                //console.log("THE AUTHENTICATION PASS:  "+authPassed);
-                //console.log("THE ROL OUTSIDE"+theRol);
-
-                
-
-                //setUserLoged(true);
-                //console.log("THEEEE ROL OF THE USER AUTHENTICATED IS (LINE 93): "+rolUser);
-                
-                // if(newUsrRol === "student"){
-                //     navigate(STUDENT,{
-                //         replace: true,
-                //         state: {
-                //             logedIn: true,
-                //         }
-                //     });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
-                // }
-                // if(newUsrRol === "student"){
-                //     navigate(ADMIN,{
-                //         replace: true,
-                //         state: {
-                //             logedIn: true,
-                //             user,
-                //         }
-                //     });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
-                // }
-            
-
+                navigate(HOME,{
+                    replace: true,
+                    state: {
+                        logedIn: true,
+                    }
+                });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
+                        
             }).catch((error) => {
                 //setUserLoged(false);
                 setHasError(true);
@@ -151,53 +90,83 @@ const Login = () => {
         
     }
 
-    function goToPage(rolUser){
-        console.log("WE ARE INSIDE goToPage AND THE ROL IS : "+rolUser);
-        if(rolUser === "student"){
-            navigate(STUDENT,{
-                replace: true,
-                state: {
-                    logedIn: true,
-                }
-            });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
-        }
-        if(rolUser === "admin"){
-            navigate(ADMIN,{
-                replace: true,
-                state: {
-                    logedIn: true,
-                    user,
-                }
-            });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
-        }
-    }
-    useEffect(() => {
+// //'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+//                                      LEER EL ROL DEL USUARIO DESDE LA DB
+
+
+// async function readUserDataFromDB(uidUser) {
+//     //this function will read the user data fro the data base firestore
+
+//     const refDoc = doc(firestore, `/Users/${uidUser}`); //we are obtaining the reference of the document according the specific user in firestore service
+//     const userDocEncrypted = await getDoc(refDoc); //we obtained the specific document of the user requiring the document but in a encrypted mode
+//     const userUncryptedData = userDocEncrypted.data();
+//     settheRol(userUncryptedData.rol);
+//     const dataUserReturn = {
+//       rol: userUncryptedData.rol,
+//     };
+//     //console.log("THE DATA UNCRYPTED IN THE APP FILE IS (LINE 59): " + dataUserReturn.rol); ////////////////////////////////////
+//     return dataUserReturn;
+// }
+
+// function readDataUserFromDB(uidUSER) {
+//   readUserDataFromDB(uidUSER)
+//     .then((dataUserReturn) => {
+//       return dataUserReturn;
+//       //console.log("THE DATA SAVED IN THE DB IS " + userAutenticated.secName);///////////////////////////////////////////////////////////
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// }
+
+//                                  UTILIZA LA DATA OBTENIDA DE LA DB
+
+
+    // function goToPage(rolUser){
+    //     console.log("WE ARE INSIDE goToPage AND THE ROL IS : "+rolUser);
+    //     if(rolUser === "student"){
+    //         navigate(STUDENT,{
+    //             replace: true,
+    //             state: {
+    //                 logedIn: true,
+    //             }
+    //         });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
+    //     }
+    //     if(rolUser === "admin"){
+    //         navigate(ADMIN,{
+    //             replace: true,
+    //             state: {
+    //                 logedIn: true,
+    //                 user,
+    //             }
+    //         });//this navigate will transfer the state of the user if is loged or not to the Navbar for to select what buttons to show
+    //     }
+    // }
+
+
+    //                              DEFINIENDO EL USE EFFECT DEL CODIGO
+
+
+    // useEffect(() => {
     
-        onAuthStateChanged(auth, (userInFirebase) => {
+    //     onAuthStateChanged(auth, (userInFirebase) => {
 
-            if(userInFirebase){
-                setUserAuth(userInFirebase);
-            }
-            else{
-                setUserAuth(null);
-                console.log(userAuth);///////////////////////////////////////////////
-            }
-        });
-       //console.log()
-        //console.log("THEEEE UID OF THE USER AUTHENTICATED IS (inside use effect): "+userAuth);
-        //console.log("THE AUTHENTICATION PASS (in use effect):  "+authPassed);
-        //signOut(auth);
+    //         if(userInFirebase){
+    //             setUserAuth(userInFirebase);
+    //         }
+    //         else{
+    //             setUserAuth(null);
+    //             console.log(userAuth);///////////////////////////////////////////////
+    //         }
+    //     });
         
-        
-        readDataUserFromDB(userAuth);
-        //readDataUserFromDB(userAuth);
-        //while(!theRol);
-        console.log("THE ROL IN USE EFFECT IS: "+ theRol);
-        if(theRol){
-            goToPage(theRol)
-        }
+    //     readDataUserFromDB(userAuth);
+    //     console.log("THE ROL IN USE EFFECT IS: "+ theRol);
+    //     if(theRol){
+    //         goToPage(theRol)
+    //     }
 
-    },[userAuth,theRol]);
+    // },[userAuth,theRol]);
     
 
     
@@ -242,27 +211,23 @@ export default Login;
 
 {/**useEffect(() => {
 
-        onAuthStateChanged(auth, (userInFirebase) => {
-
-            if(userInFirebase){
-                setUserAuth(userInFirebase);
-            }
-            else{
-                setUserAuth(null);
-                console.log(userAuth);///////////////////////////////////////////////
-            }
-        });
-
-        if (userAuth?.uid) {
-
-            console.log("THE UID READ FROM THE CONTEXT FILE IS: "+ userAuth.uid);
-            readDataUserFromDB(userAuth.uid);
+    onAuthStateChanged(auth, (userInFirebase) => {
+        if(userInFirebase){
+            setUserAuth(userInFirebase);
         }
         else{
-            console.log("The user are DISCONNECTED from the DB IN THE APP FILE (LINE 71)");
+            setUserAuth(null);
+            console.log(userAuth);///////////////////////////////////////////////
         }
-      }, [userLoged]);
- */}
+    });
+    if (userAuth?.uid) {
+        console.log("THE UID READ FROM THE CONTEXT FILE IS: "+ userAuth.uid);
+        readDataUserFromDB(userAuth.uid);
+    }
+    else{
+        console.log("The user are DISCONNECTED from the DB IN THE APP FILE (LINE 71)");
+    }
+    }, [userLoged]);*/}
 
 
 

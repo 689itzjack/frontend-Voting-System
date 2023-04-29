@@ -31,6 +31,9 @@ export function App(){
     // function getIfLogedUsr(){
     //     return localStorage.getItem('isLoged');
     // }
+    useEffect(() => {
+        
+    },[]);
 
     onAuthStateChanged(auth, (userInFirebase) => {
     
@@ -57,14 +60,13 @@ export function App(){
                     <Route path = {LOGIN} element={<Login/>} />
                     <Route path={REGISTER} element={<Register/>} />
                     {(userAuth) ?
-                        <>
-                            <Route exact path={STUDENT} element = {<DBProvider><HomeStudent/></DBProvider>}>
-                                <Route path={COURSE} element = {<Course />}  />
-                            </Route>
-                            <Route exact path={ADMIN} element = {<DBProvider><HomeAdmin/></DBProvider>} ></Route>
-                        </>               
+                        <Route exact path={HOME} element = {<DBProvider><Home/></DBProvider>} >
+
+                        </Route>
                         :
-                        <Route path={LOGIN} element={<Navigate to={LOGIN}/>} ></Route>
+                        <Route path={LOGIN} element={<Navigate to={LOGIN}/>} >
+                            
+                        </Route>
                     }
                     </Route>
                     <Route path="*" element={<Errorpage/>} /> 

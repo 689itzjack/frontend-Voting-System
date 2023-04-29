@@ -1,14 +1,43 @@
 .page-student{
     display: flex;
-    height: 100%;
-    background-color: rgb(82, 82, 91);
-    margin: 0px;
-    padding: 0px;
+    width: 100%;
+    height: 515px;
+    background-color: rgb(171, 171, 185);
+    margin: 0;
+    padding: 0;
 }
 
-aside{
+.container-list{
+    border: 10px;
+    border-color: black;
+}
+
+.page-student aside{
     width: 30%;
     height: 100%;
     background-color: black;    
     border-right: solid rgba(181, 0, 0, 0.809);
+}
+
+.container-main{
+    
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    height: auto;
+    padding-top: 1.5rem;
+
+}
+
+.container-courses{
+    margin: 0;
+    padding: 0;
+}
+
+.list-courses{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;/*coloca los elementos de este container en el centro de la pantalla del eje y*/
+    align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+    
 }

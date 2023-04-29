@@ -15,14 +15,7 @@ const UserRolProvider = ({ children }) => {
   const [userRol, setUserRol] = useState("");
 
  
-  onAuthStateChanged(auth, (userInFirebase) => {
-    if (userInFirebase) {
-      setUserAuth(userInFirebase);
-    } else {
-      setUserAuth(null);
-      setUserRol(" ");
-    }
-  });
+  
   //'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
   async function readUserDataFromDB(uidUser) {
@@ -51,6 +44,16 @@ const UserRolProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    
+    onAuthStateChanged(auth, (userInFirebase) => {
+      if (userInFirebase) {
+        setUserAuth(userInFirebase);
+      } else {
+        setUserAuth(null);
+        setUserRol(" ");
+      }
+    });
+
     if (userAuth?.uid) {
         readDataUserFromDB(userAuth.uid);
         console.log("THE USER ROL FROM THE CONTEXT USER ROL FILE IS: "+ userRol);

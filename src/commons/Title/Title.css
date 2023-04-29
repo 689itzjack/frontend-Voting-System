@@ -1,6 +1,6 @@
 .titleLabel{
     
-    color: rgba(255, 29, 29, 0.692);
+    color: #ff1c1cb0;
     font-weight: bold;
     font-size:1.5rem;
     font-family: monospace;
@@ -13,9 +13,63 @@
     font-size:2rem;
     font-family: monospace;
     margin-left: -170px;
-
 }
 
+.title-addCourse{
+    color: black;
+    font-weight: bold;
+    font-size:2rem;
+    font-family: monospace;
+}
+
+.title-selectCourse{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size:1.7rem;
+    font-family: monospace;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.issuing-vote{
+    color: black;
+    font-weight: bold;
+    margin-left: 1.5rem;
+    font-size:2.1rem;
+    
+}
+
+.dataCourse-issuing-vote{
+    white-space:pre;
+    color: black;
+    font-size:1.5rem;
+    margin-left: 1.5rem;
+
+}
+.choice-issuing-vote{
+    margin-left: 2.1rem;
+    color: black;
+    font-size:1.2rem;
+}
+.confirmation-voting{
+    color: black;
+    font-size: 1.5rem;
+    padding-left: 1.5rem;
+    display: block;
+    /* margin-top: 200px; */
+}
+.important-note{
+    display: block;
+    color: rgb(146, 18, 18);
+    font-size: 1rem;
+    border: solid 3px #901111b0;
+    
+    
+}
+.expiration-Contract{
+    color:blue;
+    padding-left: 1.5rem;
+}
 
 /*podemos hacer que un label o mas esten centrados en medio de la pantalla de 2 formas
     la primera: poniendolos dentro de un container como un <div></div> y asignandole una clase al div con el estilo "text-align: center;" para cntrarlo

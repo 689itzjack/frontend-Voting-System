@@ -15,14 +15,7 @@ const DBProvider = ({ children }) => {
   const [userFromDB, setUserFromDB] = useState(null);
 
  
-  onAuthStateChanged(auth, (userInFirebase) => {
-    if (userInFirebase) {
-      setUserAuth(userInFirebase);
-    } else {
-      setUserAuth(null);
-      //console.log(userAuth); ///////////////////////////////////////////////
-    }
-  });
+  
   //'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
   async function readUserDataFromDB(uidUser) {
@@ -69,6 +62,16 @@ const DBProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    onAuthStateChanged(auth, (userInFirebase) => {
+      if (userInFirebase) {
+        setUserAuth(userInFirebase);
+      } else {
+        setUserAuth(null);
+        setUserFromDB(null);
+        //console.log(userAuth); ///////////////////////////////////////////////
+      }
+    });
+    
     if (userAuth?.uid) {
         //console.log("THE UID READ FROM THE CONTEXT FILE IS: "+ userAuth.uid);
         readDataUserFromDB(userAuth.uid);
