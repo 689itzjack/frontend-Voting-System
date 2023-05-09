@@ -1,0 +1,2 @@
+1: cambie el path de HOME (de HOME = /home/* a HOME = /) en el archivo "pathsRoutes" de la carpeta "paths"
+2: en el archivo "homeAdmin" linea 64 hemos cambiado "if(!mainShown && pathname === "/home/*" a if(!mainShown && pathname === "/"){)"

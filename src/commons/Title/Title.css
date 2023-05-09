@@ -71,15 +71,11 @@
     padding-left: 1.5rem;
 }
 
-/*podemos hacer que un label o mas esten centrados en medio de la pantalla de 2 formas
-    la primera: poniendolos dentro de un container como un <div></div> y asignandole una clase al div con el estilo "text-align: center;" para cntrarlo
-
-.titleContainer{
-    color: blueviolet;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
+.admin-addedCourses{
+    color: antiquewhite;
 }
-    la segunda: poniendo a todos los tags labelen una clase comun, poniendo el codigo sigiente: 
-
-    */
+.voting-closed{
+    color: black;
+    font-size: 1.5rem;
+    margin-left: 1.8rem;
+}

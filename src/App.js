@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './App.css';
 import Login from "./pages/Login/Login";
 
-import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation, Navigate, useNavigate} from 'react-router-dom'
 import { ADMIN, COURSE, HOME, LOGIN, LOGOUT, REGISTER, STUDENT } from "./paths/pathsRoutes";
 import { Home } from "./pages/Home/Home";
 import { Course } from "./pages/Course/Course";
@@ -18,6 +18,9 @@ import { DBProvider } from "./Context/UserFromDB";
 import { HomeAdmin } from "./pages/HomeAdmin/HomeAdmin";
 import { HomeStudent } from "./pages/HomeStudent/HomeStudent";
 import { UserRolProvider } from "./Context/GetUserRol";
+import UserFromDB from './Context/UserFromDB';
+import { ErrorLogedin } from "./commons/pageError/ErrorLogedin";
+
 
 
 export function App(){
@@ -26,14 +29,31 @@ export function App(){
     const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
     const [userAuth, setUserAuth] = useState(null);//saves if an user is logedin
     const [rolUser, setRolUser] = useState("");
+    //const [currpath, setCurrpath] = useState();
+    //const {pathname} = useLocation();
+
+
+
+    // const {userFromDB} = useContext(UserFromDB);
+    // console.log("THE CONTEXT DB IS: ", userFromDB);
     //const [userLoged, setUserLoged] = useState(false);
 
     // function getIfLogedUsr(){
     //     return localStorage.getItem('isLoged');
     // }
-    useEffect(() => {
-        
-    },[]);
+
+
+
+    // useEffect(() => {
+
+    //     setCurrpath(window.location.href);
+
+    //     if(userAuth && currpath === "http://localhost:3000/*"){
+    //         window.location.replace('');
+    //     }
+
+
+    // },[]);
 
     onAuthStateChanged(auth, (userInFirebase) => {
     
@@ -60,16 +80,19 @@ export function App(){
                     <Route path = {LOGIN} element={<Login/>} />
                     <Route path={REGISTER} element={<Register/>} />
                     {(userAuth) ?
-                        <Route exact path={HOME} element = {<DBProvider><Home/></DBProvider>} >
+                        <>
+                            <Route exact path={HOME} element = {<DBProvider><Home /></DBProvider>} />
+                            {/* <Route path='*' element={<ErrorLogedin/>} /> */}
+                        </>
+                                
 
-                        </Route>
                         :
-                        <Route path={LOGIN} element={<Navigate to={LOGIN}/>} >
-                            
-                        </Route>
+                        
+                        <Route path={LOGOUT} element={<Navigate to={LOGIN}/>} />
                     }
-                    </Route>
-                    <Route path="*" element={<Errorpage/>} /> 
+                    <Route path='*' element={<Errorpage />} />
+                </Route>
+                     
                 
             </Routes>
         </BrowserRouter>

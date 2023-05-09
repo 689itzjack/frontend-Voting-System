@@ -58,7 +58,7 @@ contract createVote{
         newCourse.nameCourse = _nameCourse;
         //initializing the expiration contract
         dateCreatedContract = block.timestamp;//time starting contract
-        dateExpiringContract = dateCreatedContract + 300 minutes;//time caducity contract
+        dateExpiringContract = dateCreatedContract + 20 minutes;//time caducity contract
 
     }//["2/22/34","5/22/34","9/22/34"], 100102,hedva2
     //2/22/34
@@ -292,6 +292,28 @@ contract createVote{
             index++;
             
         }
+    }
+
+    function get_Date_Winner()public view returns(string memory , uint){
+
+        string memory date = voting_Dates[0];
+        uint num = votes[date];
+
+        string memory tempDate;
+        uint numTempDate;
+        uint index = 1;
+
+        while(index < voting_Dates.length){
+            tempDate = voting_Dates[index];
+            numTempDate = votes[tempDate];
+
+            if(numTempDate > num){
+                date = tempDate;
+                num = numTempDate;
+            }
+            index++;
+        }
+        return(date, num);
     }
 }
 

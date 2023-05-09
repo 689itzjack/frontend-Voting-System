@@ -85,4 +85,18 @@
     cursor:pointer;
 }
 
+.admin-addedCoursesButtons{
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    color: black;
+    border: solid;
+    border-radius: 25px;
+    border-color: black;
+    background-color: wheat;
+    font-weight:400;
+    cursor:pointer;
+    white-space:pre;
+
+}
 

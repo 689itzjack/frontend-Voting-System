@@ -1,0 +1,5 @@
+Test 1: I will going to check that the routing works as required.
+Test 2: Check if the adding of users works.
+Test 3: Check if the user have activate their metamask accounts whe the make Login
+
+

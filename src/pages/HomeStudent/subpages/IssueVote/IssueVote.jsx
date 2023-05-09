@@ -1,7 +1,7 @@
 import { async } from '@firebase/util';
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Title } from '../../../../commons/Title/Title';
 import { ethers, Contract, toNumber } from "ethers";
 import interface_Contract from './../../../../artifacts/contracts/createVote.sol/createVote.json'
@@ -9,6 +9,7 @@ import './IssueVote.css';
 import { useState } from 'react';
 import { Button } from '../../../../commons/Button/Button';
 import { HOME } from '../../../../paths/pathsRoutes';
+
 
 //  console.log();
 
@@ -25,27 +26,20 @@ export const IssueVote = ({backButton}) => {
     const [timeContract, setTimeContract] = useState(0);//save the time expiration contract in millisecs  
     const [votedDate, setVotedDate] = useState("");
     const [expiration, setExpiration] = useState(null);
+    const [dateWinner, setDateWinner] = useState('');
+    const [numVotersWin, setNumVotersWin] = useState(0);
+
     const navigate = useNavigate();
 
 
-    //const [addressStudent, setAddressStudent] = useState(null);
-    
-
-
-    //console.log("THE PARAMS ARE: ",nameCourse ,idCourse, addrCourse);//[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-
-    function handlerClickBack(){
+    ////////////////////////////////////////////// HANDLERS CLICKS //////////////////////////////////////////////////
+    function handlerClickHome(){//HANDLES THE HOME BUTTON CLICK
       //setshowFields(false);
       backButton(true);
-      navigate(HOME, {
-        replace: true,
-        state:{
-            logedIn:true,
-        }
-      });
+      
     }
 
-    function handlerClickDate(event){
+    function handlerClickDate(event){//HANDLES THE CLICK OF ONE OF THE CLICKED DATES BUTTONS 
 
       //console.log("THE DATE BUTON THAT WAS CLICKED IS: "+event.target.value);//[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]
       setShow_Buttons(true);
@@ -60,24 +54,16 @@ export const IssueVote = ({backButton}) => {
 
     }
 
-    async function voting_Confirmed(){
+    ///////////////////////////////////// CONTRACT INTERACTION ///////////////////////////////////////////////////////
+    
+
+    async function voting_Confirmed(){//This contract makes the confirmation contract, that means that her the voting is issued at the Blockchain 
 
       if(window.ethereum !== "undefined"){
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();    
         const contract = new Contract(addrCourse, interface_Contract.abi, signer);
         try {
-
-          //await instanceContract.createExam(chosenDate);
-          // await contract.createExam(chosenDate).then(() => {
-          //   console.log("The student has made chose the date: "+chosenDate);//[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]
-          // }).catch((error) => {
-          //   const dataExcp = Object.values(error);
-          //   console.log(dataExcp[7].error.data.message);
-          // });
-          // await contract.setIamReady().then(() => {
-          //   console.log("The student change the status to Ready!");
-          // });
 
           await contract.issuing_Vote(chosenDate).then(() => {
             console.log("Te studnet has made his vote now");
@@ -91,13 +77,10 @@ export const IssueVote = ({backButton}) => {
           const dataExcp = Object.values(error);
           console.log(dataExcp[7].error.data.message);
         }
-        
       }
-
     }
-    ////////////////////////////////////////FUNCTIONS CONDITIONAL CHECKERS ///////////////////////
     
-    async function student_Voted_To(){
+    async function student_Voted_To(){//Indicates what is the date that the student has voted
 
       if(window.ethereum !== "undefined"){
         const provider = new ethers.BrowserProvider(window.ethereum);
@@ -116,7 +99,8 @@ export const IssueVote = ({backButton}) => {
 
     }
     
-    const check_Expiration_Contract = async () => {//this function checks if the contract has been expired
+    const check_Expiration_Contract = async () => {//THIS FUNCTION CHECKS IF THE CONTRACT OF THE CURRENT COURSE HAS EXPIRED.
+      //RETURNS TRUE IF THE CONTRACT HAS EXPIRED AND SAVES THE DATE IN A USESTATE.
 
       if(window.ethereum !== "undefined"){
         const provider = new ethers.BrowserProvider(window.ethereum);
@@ -161,17 +145,15 @@ export const IssueVote = ({backButton}) => {
             }
     
           }
-          
-          
-
-        } catch (error) {
+        } 
+        catch (error) {
           const dataExcp = Object.values(error);
           console.log(dataExcp[7].error.data.message);
         }
       }
     }
 
-   async function check_Student_Exist(){//THIS FUNCTION CHESCK IF THE STUDENT HAS VATED ALREADY. IN THE CASE THAT HE DOESN'T EXIST, THE FUNCTION CREATES THE STUDENT.
+   async function check_Student_Exist(){//THIS FUNCTION CHECKS IF THE STUDENT HAS EXIST AT THE BLOCKCHAIN ALREADY. IN THE CASE THAT HE DOESN'T EXIST, THE FUNCTION CREATES THE STUDENT.
 
       if(window.ethereum !== "undefined"){
 
@@ -203,7 +185,8 @@ export const IssueVote = ({backButton}) => {
         
     }
 
-    async function check_Student_Voted(){
+    async function check_Student_Voted(){//AFTER THAT WE CHECK IF THE STUDENT EXIST (IN THE FUNCTION ABOVE), IN THIS FUNCTION WE CHECK IN THE CASE THAT THE STUDENT EXIST, IF HAS VOTED OR NOT.
+      //RETURNS TRUE IF THE STUDENT HAS NOT VOTE, OTHERWISE TRUE.
 
       if(window.ethereum !== "undefined"){
 
@@ -228,7 +211,8 @@ export const IssueVote = ({backButton}) => {
       }
     }
 
-    async function creating_Student(){
+    async function creating_Student(){//WHEN THE STUDENT ENTERS FOR THE FIRST TIME TO THE COURSE THAT HE WANT TO VOTE,
+      //HE NEEDS TO ACCEPT THE SUSCRIPTION TO THE BLOCKCHAIN BY HIS WALLET METAMASK, OTHERWISE HE CANNOT VOTE.
 
       if(window.ethereum !== "undefined"){
 
@@ -253,7 +237,30 @@ export const IssueVote = ({backButton}) => {
       }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
+    async function voting_Results(){//THIS FUNCTION SHOW US WICH ONE IS THE WINNER DATE THAT STUDENTS VOTED AND HOW MANY
+      //STUDENTS VOTED TO THIS DATE. THE FUNCTION SAVES THIS INFO IN TWO GLOBAL VARIABLES
+
+      if(window.ethereum !== "undefined"){
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();    
+        const contract = new Contract(addrCourse, interface_Contract.abi, signer);
+      
+        try {
+          let results = await contract.get_Date_Winner();
+          setDateWinner(results[0]);
+          let parseNum = toNumber(results[1]);
+          setNumVotersWin(parseNum);
+
+        } catch (error) {
+          const dataExcp = Object.values(error);
+          console.log(dataExcp[7].error.data.message);
+        }
+       
+      }
+    }
+
+    ////////////////////////////////////// CONNECTING TO THE CONTRACT //////////////////////////////////////////////
 
 
     const connect_with_Contract = async() => {//this function create us the instance of our contract accordding to the address contract
@@ -285,7 +292,9 @@ export const IssueVote = ({backButton}) => {
       }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////
+    
+
+    ////////////////////////////////////////////// uesEffects //////////////////////////////////////////
     
     useEffect(() => {
 
@@ -300,7 +309,14 @@ export const IssueVote = ({backButton}) => {
           
         }
         if(!closeVotation && student_Voted){
-                
+          
+          student_Voted_To();
+
+        }
+        if(closeVotation){
+
+          voting_Results();
+
         }
       }
 
@@ -315,6 +331,12 @@ export const IssueVote = ({backButton}) => {
 
       check_Expiration_Contract();
       student_Voted_To();
+
+      if(closeVotation){
+        voting_Results()
+        //console.log("THE RESULTS ARE: ", dateWinner, numVotersWin);//[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]
+
+      }
       
     },[timeContract, student_Voted]);
 
@@ -327,6 +349,8 @@ export const IssueVote = ({backButton}) => {
 
         <>
           <Title textTitle="The voting has finished" classType="issuing-vote" />
+          <br />
+          <Title textTitle={"The new Exam date is: "+ dateWinner} classType="voting-closed"/>
           <br/>
         </>
 
@@ -388,7 +412,7 @@ export const IssueVote = ({backButton}) => {
               <Title textTitle={"You has voting to the date: "+votedDate} classType="confirmation-voting" />
               <br/>
               <br/>
-              <Title textTitle={"Pease wait to the final voting to watch the final results."} classType="confirmation-voting" />
+              <Title textTitle={"Please wait to the final voting to watch the final results."} classType="confirmation-voting" />
 
             </div>
           
@@ -402,7 +426,7 @@ export const IssueVote = ({backButton}) => {
 
         <br/>
         <br/>
-        <Button idButton="back" text="HOME" classButton="button-regular" handlerFunction={handlerClickBack}  />
+        <Button idButton="home" text="HOME" classButton="button-regular" handlerFunction={handlerClickHome}  />
 
       </div>
 

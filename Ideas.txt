@@ -1,0 +1,17 @@
+////////////////////////////////////////////////////IDEAS////////////////////////////////////////////////////
+1:  hacer un boton con el cual el usuario admin pueda ver todos los cursos que hacer
+    agregado al systema
+2:  al momento de entrar en la pagina de "cursos agregados", tenemos la posibilidad de ver cual
+    es la fecha que ha ganado o si la votacion sigue en curso.
+3:  voy a modificar la pagina del admin de tal forma que al momento de que haga click en "added courses"
+    se muestren todos los cursos existentes en forma de bototones y si queremos ver los resultados de la
+    votacion de un curso, podemos oprimir el boton del curso. 
+
+
+//////////////////////////CAMBIOS ANTERIORES Y MEOJORAS DEL SISTEMA//////////////////////////
+1:  hemos cambiado el enrutamiento del home, osea, que en vez de que el path del HOME sea '/home/*'
+    va ser '/*' solamente
+2:  hemos hecho que las flechas del browser junto con el refresh hagan efecto en nuestras paginas
+    de tal manera que si le damos atras o adelante a los botones del navegador y cambia la ruta 
+    del browser, la pagina tambien cambia deacuerdo a la ruta que se indica en el navegador.
+3:  

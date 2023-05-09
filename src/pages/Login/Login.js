@@ -203,7 +203,9 @@ const Login = () => {
         <br/>
         <Button text="Accessing" classButton="loginButton" handlerFunction={handlerClickAccess}/>
         <br/>
-        <img src= {photoAzr} alt="Azrieli College photo"/>
+        <div className="img-photoAzr">
+            <img src= {photoAzr} alt="Azrieli College photo"/>
+        </div>
     </div>
 };
 

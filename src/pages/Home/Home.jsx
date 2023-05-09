@@ -16,15 +16,8 @@ import { AddCourse } from '../HomeAdmin/sub-pages/AddCourse/AddCourse';
 export const Home = () => {
 
   const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
-  //???? const [userFromDB, setUserFromDB] = useState(null);
-  //const {state} = useLocation();
-  // console.log("Is loged in:" + state.logedIn);
-  // console.log("Is user in:" + state.user);
-  // console.log("Is pass in:" + state.pass);
-
-  //console.log("THE INFO USER IN HOME IS: " + userData);
+  
   const {userFromDB} = useContext(UserFromDB);
-  //console.log("THE ROL OF THE USER IN HOME FILE IS: "+ userFromDB );
 
 
   return (
@@ -42,7 +35,7 @@ export const Home = () => {
 
       {(userFromDB?.rol === "admin") && <HomeAdmin dataUser = {userFromDB}/>}
 
-      {(userFromDB?.rol === "student") &&<HomeStudent dataUser = {userFromDB}/>}
+      {(userFromDB?.rol === "student") && <HomeStudent dataUser = {userFromDB}/>}
     </div>
     
   );

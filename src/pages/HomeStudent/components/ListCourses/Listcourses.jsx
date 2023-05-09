@@ -7,8 +7,6 @@ import { doc, getDocs } from "firebase/firestore";
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { Route, Router, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { COURSE } from '../../../../paths/pathsRoutes'
-import { IssueVote } from '../../subpages/IssueVote/IssueVote'
 
 
 
@@ -59,4 +57,3 @@ export const Listcourses = ({buttonClickedFather, dataButton}) => {
 
   );
 }
-//{id: currCourse.id, idCourse: currCourse.idCourse, adressCourse: currCourse.adressCourse}

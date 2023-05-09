@@ -1,0 +1,9 @@
+.container-AddedCourses{
+    border: solid yellow;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+    padding-top: 20px;
+
+}
