@@ -20,8 +20,7 @@ export const AddCourse = () => {
 
   const navigate = useNavigate();
   const [showFields, setshowFields] = useState(true);
-  const [addressContract, setaddressContract] = useState("");
-  const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
+  //const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
   const firestore = getFirestore(firebaseApp);//contains an instance of the firestore service.
 
 
@@ -30,18 +29,21 @@ export const AddCourse = () => {
     idCourse: "",
     first: "",
     second: "",
+    third:"",
+    exp:"",
+
   });
 
   //////////////////////////////////////////FUNCTIONS=========================================
 
-  function registerUser(addressContract){//This function will register an user in the authentication firebase service
+  function registerCourse(addressContract){//This function will register an user in the authentication firebase service
     // console.log(currUser.user.uid);///////////////////////////////////////////////
     
     const docRef = doc(firestore, `Courses/${values.nameCourse}`);//contains the specific document from firestore wher we saved the data
     setDoc(docRef, {idCourse: values.idCourse, adressCourse: addressContract,});//here we write the data of the user in the database  
   }
 
-  const deploy_Contract = async (arrayDates) => {//this function deploys a contract by the user
+  const deploy_Contract = async (arrayDates, expDate) => {//this function deploys a contract by the user
     let provider;
     let signer = null;
     //let addressContract;/////////////////////////////////////////
@@ -50,15 +52,15 @@ export const AddCourse = () => {
       
       provider = new ethers.BrowserProvider(window.ethereum);
       signer = await provider.getSigner();     
-      console.log("THE ADDRESS OF THE CURRENT USER IS: ",signer.address);////////////////////////////////////// 
+      //console.log("THE ADDRESS OF THE CURRENT USER IS: ",signer.address);////////////////////////////////////// 
       
       const factory = new ContractFactory(createVote.abi, createVote.bytecode, signer);      
-      const contract = await factory.deploy(arrayDates, parseInt(values.idCourse), values.nameCourse);      
+      const contract = await factory.deploy(arrayDates, parseInt(values.idCourse), values.nameCourse, expDate);      
 
       await contract.getAddress().then((address) => {
         //setaddressContract(address);///////////////////////////////////////
         console.log("The contract address is: "+address);///////////////////////////////////////////////////////
-        registerUser(address);
+        registerCourse(address);
         navigate(HOME, {
           replace: true,
           state:{
@@ -84,7 +86,14 @@ export const AddCourse = () => {
     event.preventDefault();
     let arrDates;
     arrDates = create_List_Dates();
-    deploy_Contract(arrDates);    
+    const newExpDate = new Date(values.exp);
+    const finalExpDate = new Date(newExpDate.setUTCHours(23,59,59,999))
+
+    finalExpDate.setHours(finalExpDate.getHours()-3)//.setUTCHours(23,59,59,999);
+    const seconds = Math.floor(finalExpDate.getTime() / 1000);
+    console.log("THE FINISH DATE IS: ", seconds)
+    
+    deploy_Contract(arrDates, seconds);    
   }
 
   function handlerInputChange(nameCurrInput, valueCurrInput){
@@ -134,7 +143,8 @@ export const AddCourse = () => {
   }
 
   function create_List_Dates(){//this function creates the array of the dates to be used by the smart contract 
-    let arrayDates = [];
+    
+    let arrayDates = [];//this is the array of the dates
     let date1 = make_Date(values.first);
     
     arrayDates.push(date1);
@@ -229,12 +239,25 @@ export const AddCourse = () => {
                 handlerCh = {handlerInputChange}
                 clase = "admin-addCourse"
               />
+              <br/>
+              <br/>
+              <br/>
+              <Label text="Voting Expiration Date" classLabel="addCourse-Inputs"/>
+              <Inputs atributte={{
+                id: "exp",
+                name: "exp",
+                placeHolder: "Enter a date in format dd/mm/yyyy",
+                type:'date',
+                }} 
+                handlerCh = {handlerInputChange}
+                clase = "admin-addCourse"
+              />
 
             </div> 
             <br/>
             <br/>
             <div className='admin-containerAddButtons'>
-              <Button idButton="back" text="< back" classButton="button-regular" handlerFunction={handlerClickBack}  />
+              <Button idButton="back" text="< Home" classButton="button-regular" handlerFunction={handlerClickBack}  />
               <Button idButton="create" text="Create +" typeButton="submit" classButton="admin-addCourseButton" handlerFunction={handlerClick}  />
             </div>
             <br/>
@@ -245,30 +268,3 @@ export const AddCourse = () => {
     </div>
   )
 }
-//async function create_Course(){
-    
-  //   if(window.ethereum !== 'undefined'){
-  //     const provider = new ethers.providers.Web3Provider(window.ethereum);//we her obtain the provider web3
-  //     const contract = new ethers.Contract()
-
-
-  //   }
-
-  // }
-
-
-
-  // function handlerClickCreate(event){
-
-  //     if(event.target.id === "addCourse"){
-  //         setMainShown(false);
-  //         setAddCourseShown(true);
-  //         console.log(event.target.id);
-          
-  //     }
-  //     if((event.target.id === "back") && (addCourseShown === true)){
-  //         setMainShown(true);
-  //         setAddCourseShown(false);
-  //         console.log(event.target.id);
-  //     }
-  // }

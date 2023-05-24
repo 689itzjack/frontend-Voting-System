@@ -86,17 +86,79 @@
 }
 
 .admin-addedCoursesButtons{
-    width: 200px;
+    width: 500px;
     height: 40px;
-    font-size: 18px;
-    color: black;
-    border: solid;
-    border-radius: 25px;
-    border-color: black;
-    background-color: wheat;
-    font-weight:400;
+    font-size: 22px;
+    color: gold;
+    border: solid 2px;
+    border-radius: 15px;
+    border-color: red;
+    background-color: black ;
+    font-weight:600;
     cursor:pointer;
     white-space:pre;
 
 }
 
+.button-NavbarHome{
+    width: 60px;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+}
+.button-NavbarHome:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarHome:focus{
+    text-decoration: underline;
+}
+
+
+.button-NavbarNewCourse{
+    width: 100px;
+    height: 30px;
+    margin-left: 8px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+}
+.button-NavbarNewCourse:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarNewCourse:focus{
+    text-decoration: underline;
+}
+
+
+
+.button-NavbarResults{
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+    
+}
+.button-NavbarResults:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarResults:focus{
+    text-decoration: underline;
+}

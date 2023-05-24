@@ -3,9 +3,6 @@ import './Inputs.css'
 
 export const Inputs = ({atributte,handlerCh,clase}) => {
 
-  
-  //else{
-
   if( atributte.type === "date"){//these tags are of type "date"
     var today = new Date();
     let newDate = "";

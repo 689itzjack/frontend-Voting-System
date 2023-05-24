@@ -33,6 +33,7 @@ contract createVote{
     Course newCourse;// This is the object Course, save all the information of the course to be voted in it.
     Student new_Student;//will contain the current student we're using in the moment.
     string[] voting_Dates;//contain the dates given by the Admin. 
+    //uint[] numVotes;
     address[] adresssesStudents;//lo lasot=======================================================
     mapping(address => bool) studentsHasVoted;//tell us if X student has vote already.
     mapping (string =>uint) votes;//contains the counters voting for every date
@@ -44,7 +45,7 @@ contract createVote{
 
 //=======================================================CONSTRUCTOR========================================================
 //The constructor will initialize the data of the course that we select to be voted 
-    constructor(string[] memory dates, uint _idCourse, string memory _nameCourse){//THIS IS THE CONSTRUCTOR, the ADMIN give the data
+    constructor(string[] memory dates, uint _idCourse, string memory _nameCourse, uint expiration){//THIS IS THE CONSTRUCTOR, the ADMIN give the data
         require((_idCourse != 0) && (bytes(_nameCourse).length != 0), "Please fill all the fields");
         owner = msg.sender;
         uint num_dates = 0;
@@ -58,7 +59,7 @@ contract createVote{
         newCourse.nameCourse = _nameCourse;
         //initializing the expiration contract
         dateCreatedContract = block.timestamp;//time starting contract
-        dateExpiringContract = dateCreatedContract + 20 minutes;//time caducity contract
+        dateExpiringContract = expiration;//time caducity contract
 
     }//["2/22/34","5/22/34","9/22/34"], 100102,hedva2
     //2/22/34
@@ -283,15 +284,30 @@ contract createVote{
 
 //=============================================SOS FUNCTIONS===================================
     
-    function printArrayStudentsVoted()public view OnlyOwner{//prints how many voters voted to every date 
+    function get_Votes()public view OnlyOwner returns(string[] memory, uint, uint, uint){//prints how many voters voted to every date 
     //this function just can be called for the Administrator.
+        uint date_1;
+        uint date_2;
+        uint date_3;
+
         uint index = 0;
         while(index < voting_Dates.length){
-            console.log("THE DATE IS: %s",voting_Dates[index]);
-            console.log("AND THE NUMBER STUDENTS VOTED TO THIS DATE: %s",votes[voting_Dates[index]]);
-            index++;
+            //numVotes.push(votes[voting_Dates[index]]);
+            //console.log("THE DATE IS: %s",voting_Dates[index]);
+            //console.log("AND THE NUMBER STUDENTS VOTED TO THIS DATE: %s",votes[voting_Dates[index]]);
+            if(index == 0){
+                date_1 = votes[voting_Dates[index]];
+            }
+            if(index == 1){
+                date_2 = votes[voting_Dates[index]];
+            }
+            if(index == 2){
+                date_3 = votes[voting_Dates[index]];
+            }
             
+            index++;
         }
+        return (voting_Dates, date_1, date_2, date_3);
     }
 
     function get_Date_Winner()public view returns(string memory , uint){

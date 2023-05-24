@@ -5,8 +5,8 @@ import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router
 import { Lista } from '../../commons/lista/Lista'
 import { Title } from '../../commons/Title/Title'
 import UserFromDB from '../../Context/UserFromDB'
-import { COURSE, ERROR404COURSE, HOME } from '../../paths/pathsRoutes'
-import { Course } from '../Course/Course'
+import { COURSE, ERROR404COURSE, HOME, LOGIN } from '../../paths/pathsRoutes'
+//import { Course } from '../Course/Course'
 import { Listcourses } from './components/ListCourses/Listcourses'
 import './HomeStudent.css'
 import { IssueVote } from './subpages/IssueVote/IssueVote'
@@ -14,20 +14,18 @@ import { ethers } from "ethers";
 import { ErrorLogedin } from '../../commons/pageError/ErrorLogedin'
 import firebaseApp from './../../firebase/credentials'
 import { collection, getDocs, getFirestore } from '@firebase/firestore'
+import { Button } from '../../commons/Button/Button'
+import { getAuth, signOut } from '@firebase/auth'
+import { NavbarUser } from '../../commons/Navbar/NavbarUser/NavbarUser'
 
 
+export const HomeStudent = () => {
 
-
-
-
-export const HomeStudent = ({ dataUser }) => {
-
-//    console.log()
 
     const {userFromDB} = useContext(UserFromDB);
     //const {pathname} = useLocation();
     const navigate = useNavigate();
-
+    const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
 
 
     const [shownList, setShownList] = useState(true);
@@ -58,6 +56,7 @@ export const HomeStudent = ({ dataUser }) => {
         }
     }
 
+   
     ///////////////////////////////////////////// FUNCTIONS METAMASK ///////////////////////////////////////////// 
 
     function matching_Path(){//THIS FUNCTION DETECTS EVERY TIME THAT THE PATH WAS CHANGED. IF SOMEBODY CHANGES THE PATH
@@ -78,7 +77,7 @@ export const HomeStudent = ({ dataUser }) => {
                         setMatchPath(true);
                 }
                 if(pathname === creatingPath){
-                  console.log("EXIST A MATCH");//[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]
+                  //console.log("EXIST A MATCH");//[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]
                   setMatchPath(true);
                 }
             })
@@ -128,11 +127,8 @@ export const HomeStudent = ({ dataUser }) => {
                     }
                 });
             }
-            
-
         }
         
-
     },[matchPath,finishReading]);
 
 
@@ -169,41 +165,46 @@ export const HomeStudent = ({ dataUser }) => {
 
     
   return (
-    <div className='page-student'>
-        
-        <aside>
-            <h1>Hi Dear Student !<br/><br/> Welcome to the voting system</h1>
-            <div className='container-list'>
-                <Lista adminData={userFromDB}/>
-            </div>
-        </aside>
+    <>
 
-        <main className='container-main'>
-            {shownList && 
+        <NavbarUser typeUser={"student"} clickedHome={setPressBackButton} userFromDB={userFromDB} />
 
-                <div className='container-courses'>
-                    <br/>
-                    <Title textTitle="Please select a course to issue a vote:" classType="title-selectCourse" />
-                    <div className='list-courses'>
-                        <br/>
-                        <Listcourses buttonClickedFather={setClickedButton} dataButton={setDataButtonClicked} />
-                    </div>
+        <div className='page-student'>
+
+            <aside>
+                <h1>Hi Dear Student !<br/><br/> Welcome to the voting system</h1>
+                <div className='container-list'>
+                    <Lista adminData={userFromDB}/>
                 </div>
-            }
+            </aside>
 
-            {(clickedButton || matchPath) && 
+            <main className='container-main'>
+                {shownList && 
 
-                <Routes>
-                    
-                    <Route path={COURSE} element={<IssueVote backButton={setPressBackButton} />} />
-                    <Route path={ERROR404COURSE} element={<ErrorLogedin message="Page not exist"/>} />
+                    <div className='container-courses'>
+                        <br/>
+                        <Title textTitle="Please select a course to issue a vote:" classType="title-selectCourse" />
+                        <div className='list-courses'>
+                            <br/>
+                            <Listcourses buttonClickedFather={setClickedButton} dataButton={setDataButtonClicked} />
+                        </div>
+                    </div>
+                }
 
-                </Routes>
-            }
-    
+                {(clickedButton || matchPath) && 
+
+                    <Routes>
+
+                        <Route path={COURSE} element={<IssueVote backButton={setPressBackButton} />} />
+                        <Route path={ERROR404COURSE} element={<ErrorLogedin message="Page not exist"/>} />
+
+                    </Routes>
+                }
+
+
+            </main>
             
-        </main>
-        
-    </div>
+        </div>
+    </>
   )
 }

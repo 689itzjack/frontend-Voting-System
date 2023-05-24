@@ -1,5 +1,18 @@
+//////////////////////////// TESTS //////////////////////////// 
 Test 1: I will going to check that the routing works as required.
 Test 2: Check if the adding of users works.
-Test 3: Check if the user have activate their metamask accounts whe the make Login
+
+
+//////////////////////////// TAREAS POR HACER //////////////////////////// 
+
+1. osafa de la posibilidad de dar tokef al contrato 
+2. hacer que los resultados se den en live del modal
+3. agregar botones de nav en navbar
+4. adaptar la info del modal
+5. mejorar la UI
+6: checar que no se puedan meter  2 fechas iguales
+7: checar que el password tenga que concidir al abrir una cuenta nueva
+
+
 
 

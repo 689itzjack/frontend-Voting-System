@@ -1,5 +1,5 @@
 .container-AddedCourses{
-    border: solid yellow;
+    /* border: solid yellow; */
     height: 100%;
     display: flex;
     flex-direction: column;

@@ -43,36 +43,27 @@ export const Navbar = () => {
     });
   }
 
-  // const handler_Home = () => {
-  //   navigate(HOME,{
-  //     replace:true, 
-  //     state: {
-  //       logedIn: true,
-  //     }
-  //   });
-  // }
+  const handler_Home = () => {
+    navigate('/',{
+      replace:true, 
+      state: {
+        logedIn: true,
+      }
+    });
+  }
 
   
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   console.log(pathname)
-  //   setTypeUser( userFromDB?.rol)
-  //   console.log("THE TYPE USER IS: ",typeUser);
+    //console.log(pathname)
+    setTypeUser( userFromDB?.rol)
+    //console.log("THE TYPE USER IS: ",typeUser);
 
-  // }, [typeUser, pathname]);
+  }, [typeUser,pathname]);
   
-  //let varSpan = state?.user;
-  //const [userLogged, setUserLogged] = useState(false)
-  //console.log("the user is logged in??" + state.logedIn);
-  //console.log("the user is logged in??" , state)
-
-  
-
-  //console.log("THE DATA FROM THE USECONTEXT IS   "+ userFromDB?.rol);
-
   return (
     <>
-        <nav className='nav-page'>
+        <nav className='nav-page'  >
 
             {
               state?.logedIn ? 
@@ -102,22 +93,3 @@ export const Navbar = () => {
     </>
   )
 }
-
-
-
-
-
-                // {typeUser === 'student' ?
-                //   <>
-                //     {pathname!== '/*' &&
-                //       <div className='buttons-private-left'>
-                        
-                //         < Link to={HOME} ><Button text="Home" classButton="button-regular" handlerFunction={handler_Home}/></Link>
-                         
-                //       </div>
-                //     }
-                //   </>
-                //   :
-                //   <></>
-
-                // }

@@ -27,7 +27,7 @@ export const IssueVote = ({backButton}) => {
     const [votedDate, setVotedDate] = useState("");
     const [expiration, setExpiration] = useState(null);
     const [dateWinner, setDateWinner] = useState('');
-    const [numVotersWin, setNumVotersWin] = useState(0);
+    //const [numVotersWin, setNumVotersWin] = useState(0);
 
     const navigate = useNavigate();
 
@@ -123,9 +123,14 @@ export const IssueVote = ({backButton}) => {
 
             //const dateNowMil = Date.now() ;
             //const dateNow = new Date(dateNowMil)
+            // const tempDate = new Date(timeContract);
+            // console.log("THE CONTRACT TIME TEMPS IS:  ", tempDate);
+            
+            
             const dateNow = new Date();
             const newNumber = toNumber(timeContract);
-            const parserToDate = new Date(newNumber * 1000);
+            const parserToDate = new Date(newNumber * 1000);//
+            console.log("THE PARSED TIME: ", parserToDate)
             let newExpDate = parserToDate.toString().substring(0,25);
             setExpiration(newExpDate);
             //console.log("THE TIME EXPIRATION CONTRACT USEEFFECT: ", typeof(newNumber));
@@ -249,8 +254,8 @@ export const IssueVote = ({backButton}) => {
         try {
           let results = await contract.get_Date_Winner();
           setDateWinner(results[0]);
-          let parseNum = toNumber(results[1]);
-          setNumVotersWin(parseNum);
+          //let parseNum = toNumber(results[1]);
+          //setNumVotersWin(parseNum);
 
         } catch (error) {
           const dataExcp = Object.values(error);

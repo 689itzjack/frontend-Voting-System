@@ -13,6 +13,7 @@ export const AddedCourses = () => {
     const [allCourses, setAllCourses] = useState([]);
     const [modalOpened, setModalOpened] = useState(false);
     const [addrCourse, setAddrCourse] = useState('');
+    const [clickedCourse, setClickedCourse] = useState(false);
 
 //////////////////////////////////////////////////////////// HANDLER FUNCTIONS ////////////////////////////////////////////////////////////
 
@@ -21,6 +22,7 @@ function handle_Click_Courses(evento){
     console.log("THE DATA IS: ", evento.target.value);
     setAddrCourse(evento.target.value);
     setModalOpened(true);
+    setClickedCourse(true);
 
 }
 
@@ -42,10 +44,16 @@ function handle_Click_Courses(evento){
           )));
         });
       },[])
+
+      useEffect(() => {
+        if(!modalOpened){
+            setAddrCourse('');
+        }
+      },[modalOpened, addrCourse]);
       
   return (
     <div className='container-AddedCourses'>
-        <Title textTitle="Push on a course to see the voting results " classType='admin-addedCourses'/>
+        <Title textTitle="PUSH ON A COURSE TO SEE THE VOTING RESULTS " classType='admin-addedCourses'/>
         <br/>
         <br/>
         {allCourses.map((course, ind) => {
@@ -58,8 +66,9 @@ function handle_Click_Courses(evento){
                 </div>
             )
         })}
+        {modalOpened && <Modal opened={modalOpened} closeModal={setModalOpened} addr={addrCourse}/>}
 
-        <Modal opened={modalOpened} closeModal={setModalOpened} addr={addrCourse}/>
+        
     </div>
   )
 }

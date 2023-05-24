@@ -17,10 +17,10 @@
     position: relative;
     background-color: whitesmoke;
     min-width: 350px;
-    max-width: 400px;
+    max-width: 450px;
     min-height: 250px;
     max-height: 300px;
-    border-radius: 2px;
+    border-radius: 5px;
     padding: 5px;
 
 }
@@ -28,7 +28,15 @@
     position: absolute;
     /* top: 2rem;*/
     right: 0rem; 
+    top: 0;
     border-radius: 2px;
     cursor:pointer;
+
+}
+
+.container-Dates{
+    margin-left: 20px;
+    font-size: large;
+    font-weight: 700;
 
 }

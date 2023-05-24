@@ -1,0 +1,34 @@
+.nav-page-User{
+    /* overflow: hidden;    */
+    position: fixed; /*Set the navbar to fixed position */
+    top: 0;
+    height: 40px;
+    width: 100%;
+    background-color: black;
+    padding: 5px;
+    /* display: block; */
+    justify-content: space-between;
+    /* border-bottom: solid  gainsboro; */
+}
+
+.buttons-private-right{
+    float: right;
+    color: gainsboro;
+}
+
+span{
+    font-weight:600 ;
+}
+
+.nav-page-User img{
+    width: 40px;
+    height: 39px;
+    border-radius: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.buttons-private-left{
+    display: flex;
+}
+

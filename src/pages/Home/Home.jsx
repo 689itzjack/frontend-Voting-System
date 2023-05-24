@@ -12,34 +12,38 @@ import { Course } from '../Course/Course';
 import { useContext } from 'react';
 import UserFromDB from '../../Context/UserFromDB';
 import { AddCourse } from '../HomeAdmin/sub-pages/AddCourse/AddCourse';
+import { NavbarUser } from '../../commons/Navbar/NavbarUser/NavbarUser';
 
 export const Home = () => {
 
-  const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
+  //const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
   
   const {userFromDB} = useContext(UserFromDB);
-
+//dataUser = {userFromDB}
 
   return (
     <div className='home-style'>
 
-      
-      {/* <Routes>
+      {(userFromDB?.rol === "admin") && 
+          <HomeAdmin />
+      }
+
+      {(userFromDB?.rol === "student") && 
+          <HomeStudent />
+      }
+
+    </div>
+    
+  );
+};
+
+ {/* <Routes>
        
           <Route path={ADMIN} element={<HomeAdmin dataUser = {userFromDB}/>} />
           <Route path={STUDENT} element={<HomeStudent dataUser = {userFromDB}/>} />
           <Route path={COURSE} element = {<Course />}  />
       </Routes> */}
 
-      
-
-      {(userFromDB?.rol === "admin") && <HomeAdmin dataUser = {userFromDB}/>}
-
-      {(userFromDB?.rol === "student") && <HomeStudent dataUser = {userFromDB}/>}
-    </div>
-    
-  );
-};
 
 
 // //000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

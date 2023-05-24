@@ -1,2 +1,24 @@
-1: cambie el path de HOME (de HOME = /home/* a HOME = /) en el archivo "pathsRoutes" de la carpeta "paths"
-2: en el archivo "homeAdmin" linea 64 hemos cambiado "if(!mainShown && pathname === "/home/*" a if(!mainShown && pathname === "/"){)"
+//////////////////////////CAMBIOS ANTERIORES Y MEOJORAS DEL SISTEMA//////////////////////////
+
+1:  cambie el path de HOME (de HOME = /home/* a HOME = /) en el archivo "pathsRoutes" de la carpeta "paths"
+2:  en el archivo "homeAdmin" linea 64 hemos cambiado "if(!mainShown && pathname === "/home/*" a if(!mainShown && pathname === "/"){)"
+3:  he agregado la funcion "get_Votes()" que nos va a regresar todos los votos hechos por los estudiantes
+4:  he agregado la funcion "get_Date_Winner()" que nos retorna la fecha donde la mayoria votaron
+5:  cambie la funcion "issuing_Vote()" de tal forma que podamos hacer la transaccion de un jale y no tener que confirmar 3 veces para poder 
+    tramitar el voto.
+6:  hemos hecho que las flechas del browser junto con el refresh hagan efecto en nuestras paginas
+    de tal manera que si le damos atras o adelante a los botones del navegador y cambia la ruta 
+    del browser, la pagina tambien cambia deacuerdo a la ruta que se indica en el navegador.
+
+
+
+
+Cambios por hacer
+
+1: checar que no se puedan meter  2 fechas iguales
+2: checar que el password tenga que concidir al abrir una cuenta nueva
+3: crear una ventana emergente la cual diga que curso el usuario admin a agregado 
+4: checar que los botones no se muestren si el usuario no tiene activada su cuenta de metamask
+5: hacer que las paginas de ERROR se redirijan hacia la pagina de Home.
+6: al momento de cambiar las pags del admin con los botones o al recargar la pag, tenemos tambien que marcar en el 
+    navbar que la pagina ah cambiado

@@ -12,19 +12,21 @@ import UserFromDB from '../../Context/UserFromDB';
 import { useState } from 'react';
 import { ADDED_COURSES, ERROR404_NOPAGE, NEWCOURSE, RES_COURSE } from '../../paths/pathsRoutes';
 import { AddCourse } from './sub-pages/AddCourse/AddCourse';
-import { ethers, Contract, toNumber } from "ethers";
+import { ethers } from "ethers";
+//import minipic from './../../assets/images/azrieli.png'
 
 //import { FirstMain } from './sub-pages/FirstMain/FirstMain';
 import { useRef } from 'react';
 import { ErrorLogedin } from '../../commons/pageError/ErrorLogedin';
-import { ResultofCourse } from './sub-pages/ResultCourse/ResultofCourse';
+//import { ResultofCourse } from './sub-pages/ResultCourse/ResultofCourse';
 import { AddedCourses } from './sub-pages/AddedCourses/AddedCourses';
+import { NavbarUser } from '../../commons/Navbar/NavbarUser/NavbarUser';
 
 
-export const HomeAdmin = (  ) => {
+export const HomeAdmin = () => {
 
     const {userFromDB} = useContext(UserFromDB);
-    const [mainShown, setMainShown] = useState(false);
+    const [mainShown, setMainShown] = useState(true);
     const [goToPage, setGoToPage] = useState(false);
     //const [watchResShown, setWatchResShown] = useState(false);
     //const [watchCoursesShown, setWatchCoursesShown] = useState(false);
@@ -119,7 +121,7 @@ export const HomeAdmin = (  ) => {
             //checking_Path()
             //console.log("THE CURRENT PATH IS: ", pathname);//[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]
             if(pathname === NEWCOURSE){
-                console.log("WE ARE IN THE PATH NEWCOURSE");
+                setClickedButton(true);
                 navigate(NEWCOURSE, {
                     replace: true,
                     state:{
@@ -130,7 +132,7 @@ export const HomeAdmin = (  ) => {
             }
             
             else if(pathname === ADDED_COURSES){
-                console.log("WE ARE IN THE PATH ADDED_COURSES");
+                setClickedButton(true);
                 navigate(ADDED_COURSES, {
                     replace: true,
                     state:{
@@ -139,7 +141,6 @@ export const HomeAdmin = (  ) => {
                 });
             }
             else{
-                console.log("YOU HAS WRITED AN INVALID PATH");
                 navigate(ERROR404_NOPAGE, {
                     replace: true,
                     state:{
@@ -157,13 +158,13 @@ export const HomeAdmin = (  ) => {
         }
         
         
-    },[pathname]);
+    },[pathname, clickedButton]);
 ////////////////////////////////////////////////////////////////////////////////////////// 
 
   
   return (
     <div className='page-admin'>
-        
+        <NavbarUser typeUser="admin" clickedHome={setClickedButton} mainSHown={setMainShown} userFromDB={userFromDB} />
         <aside>
             <h1>Hi {userFromDB?.name}!<br/><br/> Welcome to the voting system</h1>
             <div className='container-list'>
@@ -190,15 +191,16 @@ export const HomeAdmin = (  ) => {
                 </div>
             }
             
-            {/* {goToPage && */}
+            {(clickedButton && !mainShown) &&
+            
                 <Routes>
-
                     <Route path={NEWCOURSE} element = { <AddCourse />}  />
                     <Route path={ADDED_COURSES} element = { <AddedCourses />}  />
                     <Route path={ERROR404_NOPAGE} element = { <ErrorLogedin message="Page not Found" />}  />
-
                 </Routes>
-            {/* } */}
+            
+            }
+            
             
         </main>
     </div>
@@ -206,20 +208,3 @@ export const HomeAdmin = (  ) => {
         
   )
 }
-
-{/* <br/>
-<br/>
-<Button idButton="watchRes" text="Watch results of a Course" classButton="admin-main-buttons" handlerFunction={handlerClick}/> */}
-// <Route path={RES_COURSE} element={ <ResultofCourse />} />
-// else if(pathname === RES_COURSE){
-            //     console.log("WE ARE IN THE PATH RES_COURSE");
-            //     navigate(RES_COURSE, {
-            //         replace: true,
-            //         state:{
-            //             logedIn:true,
-            //         }
-            //     });
-
-            // }
-
-

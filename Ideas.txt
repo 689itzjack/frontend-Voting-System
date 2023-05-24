@@ -6,12 +6,12 @@
 3:  voy a modificar la pagina del admin de tal forma que al momento de que haga click en "added courses"
     se muestren todos los cursos existentes en forma de bototones y si queremos ver los resultados de la
     votacion de un curso, podemos oprimir el boton del curso. 
+4:  crear una ventana emergente la cual diga que curso el usuario admin a agregado 
 
 
-//////////////////////////CAMBIOS ANTERIORES Y MEOJORAS DEL SISTEMA//////////////////////////
-1:  hemos cambiado el enrutamiento del home, osea, que en vez de que el path del HOME sea '/home/*'
-    va ser '/*' solamente
-2:  hemos hecho que las flechas del browser junto con el refresh hagan efecto en nuestras paginas
-    de tal manera que si le damos atras o adelante a los botones del navegador y cambia la ruta 
-    del browser, la pagina tambien cambia deacuerdo a la ruta que se indica en el navegador.
-3:  
+Paginas:
+
+http://www.falconmasters.com/web-design/tutorial-menu-de-navegacion-fijo/ ///nos ensenia como crear un navbar fijo
+https://geekflare.com/es/classy-css-hover-effects/ ////nos ensena a cambiar texto de botones y hover
+https://soliditytips.com/articles/solidity-dates-time-operations/ ///nos ensenia como convertir timestamps entre solidity y JS
+

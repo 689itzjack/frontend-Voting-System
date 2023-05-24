@@ -28,8 +28,8 @@ export function App(){
     const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
     const firestore = getFirestore(firebaseApp);//contains the instance to the firestore service of our aplication firebase 
     const [userAuth, setUserAuth] = useState(null);//saves if an user is logedin
-    const [rolUser, setRolUser] = useState("");
-    //const [currpath, setCurrpath] = useState();
+    //const [pathBefore, setPathBefore] = useState("");
+    const [currpath, setCurrpath] = useState();
     //const {pathname} = useLocation();
 
 
@@ -47,13 +47,13 @@ export function App(){
     // useEffect(() => {
 
     //     setCurrpath(window.location.href);
+    //     console.log("THE CURR PATH IS: ", currpath);
+    //     // if(userAuth && currpath !== "http://localhost:3000/login"){
 
-    //     if(userAuth && currpath === "http://localhost:3000/*"){
-    //         window.location.replace('');
-    //     }
+    //     // }
 
 
-    // },[]);
+    // },[currpath]);
 
     onAuthStateChanged(auth, (userInFirebase) => {
     
@@ -77,23 +77,24 @@ export function App(){
             <Routes>
 
                 <Route path="/" element = {<DBProvider><Navbar/></DBProvider>} >
+
                     <Route path = {LOGIN} element={<Login/>} />
                     <Route path={REGISTER} element={<Register/>} />
+                    
+                </Route>
+                
                     {(userAuth) ?
-                        <>
-                            <Route exact path={HOME} element = {<DBProvider><Home /></DBProvider>} />
-                            {/* <Route path='*' element={<ErrorLogedin/>} /> */}
-                        </>
-                                
+
+                        <Route exact path={HOME} element = {<DBProvider><Home /></DBProvider>} />   
 
                         :
                         
                         <Route path={LOGOUT} element={<Navigate to={LOGIN}/>} />
                     }
                     <Route path='*' element={<Errorpage />} />
-                </Route>
-                     
                 
+                
+            
             </Routes>
         </BrowserRouter>
         

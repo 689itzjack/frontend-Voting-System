@@ -72,10 +72,19 @@
 }
 
 .admin-addedCourses{
-    color: antiquewhite;
+    color: black;
+    font-size: xx-large;
 }
 .voting-closed{
     color: black;
     font-size: 1.5rem;
     margin-left: 1.8rem;
+}
+
+.admin-modal{
+    font-size: 31px;
+}
+.voting-closed-Modal{
+    color: black;
+    font-size: 1.5rem;
 }
