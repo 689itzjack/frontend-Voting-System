@@ -5,15 +5,23 @@ import { ADDED_COURSES, HOME, LOGIN, NEWCOURSE } from '../../../paths/pathsRoute
 import miniPic from './../../../assets/images/azrieli.png'
 import { Button } from '../../Button/Button';
 import firebaseApp from './../../../firebase/credentials'
+import { ethers } from "ethers";
 
 import './NavbarUser.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 export const NavbarUser = ({typeUser, clickedHome,mainSHown, userFromDB}) => {
 
   const navigate = useNavigate();
   const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
   const {pathname} = useLocation();
+  const [shownList, setShownList] = useState(false);
+  const runOnce = useRef(false);
 
+
+/////////////////////////////////////////////HANDLER FUNCTIONS/////////////////////////////////////////////
 
   const logOut = () => {
     
@@ -64,6 +72,35 @@ export const NavbarUser = ({typeUser, clickedHome,mainSHown, userFromDB}) => {
       }
     });
   }
+/////////////////////////////////////////////FUNCTIONS SOS/////////////////////////////////////////////
+
+  async function checking_Address_Metamask(){
+
+    if(window.ethereum !== "undefined"){
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();  
+        if(userFromDB.adMeta !== signer.address){
+            setShownList(false);
+        }
+        else{
+            setShownList(true);
+        }
+    }
+  }
+
+  useEffect(() => {
+
+    if(typeUser === "admin" && !runOnce.current){
+
+      checking_Address_Metamask();
+    }
+      
+    return () => {
+      runOnce.current = true;
+    }
+  
+  },[]);
+
   return (<>
     <nav className='nav-page-User'>
 
@@ -92,12 +129,17 @@ export const NavbarUser = ({typeUser, clickedHome,mainSHown, userFromDB}) => {
             <Button text="Logout" classButton="button-regular" handlerFunction={logOut}/>
           </div>
 
-          <div className='buttons-private-left'>
-            <img src={miniPic} alt='minipic' onClick={handler_Home}/>
-            <Button text="Home" classButton="button-NavbarHome" handlerFunction={handler_Home}/>
-            <Button text="NewCourse" classButton="button-NavbarNewCourse" handlerFunction={handler_NewCourse}/>
-            <Button text="Results" classButton="button-NavbarResults" handlerFunction={handler_Results}/>
-          </div>
+          {shownList && 
+          
+            <div className='buttons-private-left'>
+              <img src={miniPic} alt='minipic' onClick={handler_Home}/>
+              <Button text="Home" classButton="button-NavbarHome" handlerFunction={handler_Home}/>
+              <Button text="NewCourse" classButton="button-NavbarNewCourse" handlerFunction={handler_NewCourse}/>
+              <Button text="Results" classButton="button-NavbarResults" handlerFunction={handler_Results}/>
+            </div>
+          
+          }
+          
         </>
 
       }

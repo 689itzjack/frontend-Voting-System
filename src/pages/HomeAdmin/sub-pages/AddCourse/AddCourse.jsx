@@ -59,7 +59,7 @@ export const AddCourse = () => {
 
       await contract.getAddress().then((address) => {
         //setaddressContract(address);///////////////////////////////////////
-        console.log("The contract address is: "+address);///////////////////////////////////////////////////////
+        //console.log("The contract address is: " + address);///////////////////////////////////////////////////////
         registerCourse(address);
         navigate(HOME, {
           replace: true,
@@ -89,10 +89,9 @@ export const AddCourse = () => {
     const newExpDate = new Date(values.exp);
     const finalExpDate = new Date(newExpDate.setUTCHours(23,59,59,999))
 
-    finalExpDate.setHours(finalExpDate.getHours()-3)//.setUTCHours(23,59,59,999);
+    finalExpDate.setHours(finalExpDate.getHours()-3);//.setUTCHours(23,59,59,999);
     const seconds = Math.floor(finalExpDate.getTime() / 1000);
-    console.log("THE FINISH DATE IS: ", seconds)
-    
+    //console.log("THE FINISH DATE IS: ", seconds)
     deploy_Contract(arrDates, seconds);    
   }
 
@@ -146,17 +145,14 @@ export const AddCourse = () => {
     
     let arrayDates = [];//this is the array of the dates
     let date1 = make_Date(values.first);
-    
     arrayDates.push(date1);
-    //console.log("THE FIRSTE DATE "+date1);/////////////////////////////////////
+    
     if(values.second){
       let date2 = make_Date(values.second);
-      //console.log("THE SECOND DATE "+date2);/////////////////////////////////////
       arrayDates.push(date2);
     }
     if(values.third){
       let date3 = make_Date(values.third);
-      //console.log("THE SECOND DATE "+date2);/////////////////////////////////////
       arrayDates.push(date3);
     }
 
@@ -173,10 +169,12 @@ export const AddCourse = () => {
         {showFields &&
           <form onSubmit={(event) => {handlerClickCreate(event)}}>
             <br/>
-            <Title textTitle="Adding a new Course" classType="title-addCourse" />
-            <br/>
-            <br/>
+            
             <div className='container-dates'>
+              
+              <Title textTitle="Adding a new Course" classType="title-addCourse" />
+              <br/>
+              <br/>
               <Label text="Name Course" classLabel="addCourse-Inputs"/>
               <Inputs atributte={{
                 id: "nameCourse",
@@ -187,7 +185,6 @@ export const AddCourse = () => {
                 handlerCh = {handlerInputChange}
                 clase = "admin-addCourse"
               />
-              <br/>
               <br/>
               <br/>
               <Label text="Id Course" classLabel="addCourse-Inputs"/>
@@ -202,7 +199,6 @@ export const AddCourse = () => {
               />
               <br/>
               <br/>
-              <br/>
               <Label text="First date" classLabel="addCourse-Inputs"/>
               <Inputs atributte={{
                 id: "first",
@@ -213,7 +209,6 @@ export const AddCourse = () => {
                 handlerCh = {handlerInputChange}
                 clase = "admin-addCourse"
               />
-              <br/>
               <br/>
               <br/>
               <Label text="Second date" classLabel="addCourse-Inputs"/>
@@ -228,7 +223,6 @@ export const AddCourse = () => {
               />    
               <br/>
               <br/>
-              <br/>
               <Label text="Third date (Optional)" classLabel="addCourse-Inputs"/>
               <Inputs atributte={{
                 id: "third",
@@ -239,7 +233,6 @@ export const AddCourse = () => {
                 handlerCh = {handlerInputChange}
                 clase = "admin-addCourse"
               />
-              <br/>
               <br/>
               <br/>
               <Label text="Voting Expiration Date" classLabel="addCourse-Inputs"/>

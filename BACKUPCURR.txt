@@ -19,19 +19,18 @@ export const IssueVote = ({backButton}) => {
     const runOnce = useRef(false);
     const {nameCourse, idCourse, addrCourse} = useParams();
     const [datesFromBC, setDatesFromBC] = useState(null);//save all the dates to vote 
-    const [studentCreated, setStudentCreated] = useState(null);//save if the student has been created in the BC
-    const [student_Voted, setStudent_Voted] = useState(null);//save if the student has voted
+    const [studentCreated, setStudentCreated] = useState(false);//save if the student has been created in the BC
+    const [student_Voted, setStudent_Voted] = useState(false);//save if the student has voted
     const [closeVotation, setCloseVotation] = useState(null);//save if the votation has been closed because the contract course has expired
-    const [show_Buttons, setShow_Buttons] = useState(null);//if we select a course, show the confirmation buttons
+    const [show_Buttons, setShow_Buttons] = useState(false);//if we select a course, show the confirmation buttons
     const [chosenDate, setChosenDate] = useState("");//save the date that the user is selecting now
     const [timeContract, setTimeContract] = useState(0);//save the time expiration contract in millisecs  
     const [votedDate, setVotedDate] = useState("");
     const [expiration, setExpiration] = useState(null);
     const [dateWinner, setDateWinner] = useState('');
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    //const navigate = useNavigate();
-
+    const navigate = useNavigate();
 
 
     ////////////////////////////////////////////// HANDLERS CLICKS //////////////////////////////////////////////////
@@ -103,8 +102,7 @@ export const IssueVote = ({backButton}) => {
     
     const check_Expiration_Contract = async () => {//THIS FUNCTION CHECKS IF THE CONTRACT OF THE CURRENT COURSE HAS EXPIRED.
       //RETURNS TRUE IF THE CONTRACT HAS EXPIRED AND SAVES THE DATE IN A USESTATE.
-      //setLoading(true);
-      charging_Page();
+      setLoading(true);
       if(window.ethereum !== "undefined"){
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();    
@@ -303,42 +301,31 @@ export const IssueVote = ({backButton}) => {
       }
     }
 
-////////////////////////////////////////////// SOS FUNCTIONS //////////////////////////////////////////
-
-    const charging_Page = () => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false)
-      },2000);
-    }
     
 
-////////////////////////////////////////////// uesEffects //////////////////////////////////////////
+    ////////////////////////////////////////////// uesEffects //////////////////////////////////////////
     
-
     useEffect(() => {
 
       if(runOnce.current === false){
         
         check_Expiration_Contract();
 
-        if(!closeVotation){
+        check_Student_Exist();
 
-          check_Student_Exist();
-
-          if(!student_Voted){
-            connect_with_Contract();//GIVE US THE CONTRACT DATES AND CREATE US THE CURRENT STUDENT AT THE COURSE CONTRACT BC.
-            //IF THE STUDENT ALREADY EXIST, WE GET IF HE ALREADY VOTED 
-          }
+        if(!closeVotation && !student_Voted){
+          connect_with_Contract();//GIVE US THE CONTRACT DATES AND CREATE US THE CURRENT STUDENT AT THE COURSE CONTRACT BC.
+          //IF THE STUDENT ALREADY EXIST, WE GET IF HE ALREADY VOTED 
           
-          if(student_Voted){
-            student_Voted_To();
-          }
-        } 
-
+        }
+        if(!closeVotation && student_Voted){
+          
+          student_Voted_To();
+        }
         if(closeVotation){
 
           voting_Results();
+
         }
       }
 
@@ -347,27 +334,21 @@ export const IssueVote = ({backButton}) => {
         runOnce.current = true;
       }
 
-    },[closeVotation, timeContract, student_Voted]);
+    },[closeVotation]);
 
     useEffect(() => {
 
       check_Expiration_Contract();
+      student_Voted_To();
 
       if(closeVotation){
         voting_Results()
         //console.log("THE RESULTS ARE: ", dateWinner, numVotersWin);//[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]
-      }
 
-      if(!closeVotation){
-        student_Voted_To();
       }
       
     },[timeContract, student_Voted]);
 
-
-    if(loading){
-      return(<LoadingPage/>)
-    }
 
   return (
 
@@ -376,9 +357,8 @@ export const IssueVote = ({backButton}) => {
       {closeVotation ?
 
         <>
+          {}
           <Title textTitle="The voting has finished" classType="issuing-vote" />
-          <br />
-          <Title textTitle={"Course selected: "+nameCourse+'\n'+"  Id Course: "+idCourse} classType="dataCourse-issuing-vote" />
           <br />
           <Title textTitle={"The new Exam date is: "+ dateWinner} classType="voting-closed"/>
           <br/>
@@ -411,7 +391,6 @@ export const IssueVote = ({backButton}) => {
               <div className='container-voting'>
               <br/>
                 <Title textTitle="IMPORTANT NOTE: ONCE YOU PUSH ON THE BUTTON 'CONFIRM', YOU WILL NOT BE ABLE TO VOTE AGAIN TO THIS COURSE!" classType="important-note" />
-                <br />
                 <Title textTitle={"(Please press on the date of your choice)"} classType="choice-issuing-vote" />
               </div>
             
@@ -454,6 +433,8 @@ export const IssueVote = ({backButton}) => {
         </>
       }
 
+
+
       <br/>
       <br/>
       <div className='button-home'>
@@ -461,8 +442,7 @@ export const IssueVote = ({backButton}) => {
         <br/>
         <br/>
         <Button idButton="home" text="HOME" classButton="button-regular" handlerFunction={handlerClickHome}  />
-        <br />
-        <br />
+
       </div>
 
       

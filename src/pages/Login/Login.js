@@ -178,7 +178,7 @@ const Login = () => {
         {hasError && <label className="label-pass-error"><br/>The password or user are incorret.</label>}
         <br/>
         <br/>
-        <Label text = 'User E-mail'/>
+        <Label text = 'E-mail User'/>
         {/*si cambiamos el atributo name:User por name:password entonces el hook useState del USER no se va a ejecutar porque la condicion name === "User" no se cumple*/}
         <Input atributte={{
             id: 'User',

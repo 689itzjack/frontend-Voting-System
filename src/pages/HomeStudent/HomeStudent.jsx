@@ -172,8 +172,9 @@ export const HomeStudent = () => {
         <div className='page-student'>
 
             <aside>
-                <h1>Hi Dear Student !<br/><br/> Welcome to the voting system</h1>
-                <div className='container-list'>
+                <br />
+                <span className='span-Up'>Hi Dear Student !</span> <br/><br/><span className='span-Down' >Welcome to the voting system</span><br />
+                <div className='container-list-Student'>
                     <Lista adminData={userFromDB}/>
                 </div>
             </aside>
@@ -182,10 +183,10 @@ export const HomeStudent = () => {
                 {shownList && 
 
                     <div className='container-courses'>
-                        <br/>
-                        <Title textTitle="Please select a course to issue a vote:" classType="title-selectCourse" />
                         <div className='list-courses'>
                             <br/>
+                            <Title textTitle="Please select a course to issue a vote:" classType="title-selectCourse" />
+                            <br/><br />
                             <Listcourses buttonClickedFather={setClickedButton} dataButton={setDataButtonClicked} />
                         </div>
                     </div>

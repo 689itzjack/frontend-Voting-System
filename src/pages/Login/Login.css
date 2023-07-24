@@ -8,6 +8,7 @@
     width: 200px;
     height: 160px;
     border-radius: 30px;
+    border: solid rgba(181, 0, 0, 0.809);
 }
 .label-pass-error{
     color: yellow;

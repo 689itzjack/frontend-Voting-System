@@ -5,16 +5,16 @@ import './Lista.css';
 export const Lista = ({adminData}) => {
   return (
     <div className='list-user'>
-        
-        <span>Name: {adminData?.name}</span>
+        <span id='title'>Data User</span><br/><br/>
+        <span className='span-List-Side' >Name: </span><span>{adminData?.name}</span>
         <br/><br/>
-        <span>Surname: {adminData?.secName}</span>
+        <span className='span-List-Side'>Surname: </span><span>{adminData?.secName}</span>
         <br/><br/>
-        <span>E-mail: {adminData?.email}</span>
+        <span className='span-List-Side'>E-mail: </span><span>{adminData?.email}</span> 
         <br/><br/>
-        <span>Phone Number: {adminData?.phone}</span>
+        <span className='span-List-Side'>Phone Number: </span><span>{adminData?.phone}</span>
         <br/><br/>
-        <span>Metamask Account: <br/><h6>{adminData?.adMeta}</h6></span>
+        <span className='span-List-Side'>Metamask Account: </span><br/><span className='meta-Adrs'>{adminData?.adMeta}</span> 
     </div>
   )
 }

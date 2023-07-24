@@ -13,16 +13,19 @@ export const AddedCourses = () => {
     const [allCourses, setAllCourses] = useState([]);
     const [modalOpened, setModalOpened] = useState(false);
     const [addrCourse, setAddrCourse] = useState('');
-    const [clickedCourse, setClickedCourse] = useState(false);
+    const [clickedCourseName, setClickedCourseName] = useState('');
+    const [clickedCourseId, setClickedCourseId] = useState('');
+
 
 //////////////////////////////////////////////////////////// HANDLER FUNCTIONS ////////////////////////////////////////////////////////////
 
 function handle_Click_Courses(evento){
 
-    console.log("THE DATA IS: ", evento.target.value);
     setAddrCourse(evento.target.value);
     setModalOpened(true);
-    setClickedCourse(true);
+    //console.log("The data of the button clicked is: ", evento.target.id,"and tooo", evento.target.name);//[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    setClickedCourseName(evento.target.name);
+    setClickedCourseId(evento.target.id);
 
 }
 
@@ -60,13 +63,13 @@ function handle_Click_Courses(evento){
            
             return (
                 <div key={ind}>
-                    <Button idButton={course.idCourse} classButton='admin-addedCoursesButtons' text={course.id+'   '+course.idCourse} theValue={course.adressCourse} handlerFunction={handle_Click_Courses} />
+                    <Button idButton={course.idCourse} name={course.id} classButton='admin-addedCoursesButtons' text={course.id+'   '+course.idCourse} theValue={course.adressCourse} handlerFunction={handle_Click_Courses} />
                     <br/>
                     <br/>
                 </div>
             )
         })}
-        {modalOpened && <Modal opened={modalOpened} closeModal={setModalOpened} addr={addrCourse}/>}
+        {(modalOpened && clickedCourseId && clickedCourseName) && <Modal opened={modalOpened} closeModal={setModalOpened} addr={addrCourse} nameCourse={clickedCourseName} idCourse={clickedCourseId} />}
 
         
     </div>

@@ -6,11 +6,12 @@ import { useEffect } from 'react';
 import { Title } from '../Title/Title';
 import { Label } from '../Label/Label';
 import { object } from 'prop-types';
+import { LoadingPage } from '../LoadingPage/LoadingPage';
 
 //import votingPhoto from '../../assets/images/Picture1.png'
 
 
-export const Modal = ({opened, closeModal, addr}) => {
+export const Modal = ({opened, closeModal, addr, nameCourse, idCourse}) => {
 
   const [expiration, setExpiration] = useState(null);
   const [closeVotation, setCloseVotation] = useState(null);
@@ -18,6 +19,9 @@ export const Modal = ({opened, closeModal, addr}) => {
   const [dateWinner, setDateWinner] = useState('');
   const [timeContract, setTimeContract] = useState(0);//save the time expiration contract in millisecs  
   const [addrCourse, setAddrCourse] = useState(addr);
+  const [loading, setLoading] = useState(null);
+
+
 
 
   function handlerClose(){
@@ -58,7 +62,7 @@ export const Modal = ({opened, closeModal, addr}) => {
 
   const check_Expiration_Contract = async () => {//THIS FUNCTION CHECKS IF THE CONTRACT OF THE CURRENT COURSE HAS EXPIRED.
     //RETURNS TRUE IF THE CONTRACT HAS EXPIRED AND SAVES THE DATE IN A USESTATE.
-
+    charging_Page();
     if(window.ethereum !== "undefined"){
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();    
@@ -122,6 +126,19 @@ export const Modal = ({opened, closeModal, addr}) => {
     }
   }
 
+  ////////////////////////////////////////////// SOS FUNCTIONS //////////////////////////////////////////
+
+  const charging_Page = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false)
+    },2000);
+  }
+  
+
+////////////////////////////////////////////// uesEffects //////////////////////////////////////////
+  
+
   useEffect(() => {
 
       check_Expiration_Contract();
@@ -131,52 +148,65 @@ export const Modal = ({opened, closeModal, addr}) => {
       else{
         voting_Results();
       }
-      
   
-   
-  },[closeVotation, timeContract, addrCourse])
+  },[closeVotation, timeContract, addrCourse]);
 
   return (
     <article className={`modal ${opened && 'is-open'}`}>
-
+        
         <div className='modal-container'>
 
             <button className='modal-close' onClick={handlerClose}>X</button>
             <br />
-
-            {!closeVotation ?
+            {loading ? 
+            
+              <LoadingPage/>
+              :
               <>
-                {votes && 
+                {!closeVotation ?
                   <>
-                    <Title textTitle="Voting in process..." classType='admin-modal' />
-                    <Title textTitle={"The votation expires in: "+expiration} classType="expiration-Contract" />
-                    <h2>The results till now are:</h2>
-                    {votes.map((result) => {
-                      let tempDate = Object.keys(result);
-                      let tempNum = Object.values(result);
-                      console.log("THE VALUS ARE: ",tempDate[0])
-                      return(
-                        <div className='container-Dates'>
-                          {tempDate[0]}: {tempNum}
-                          <br />
-                          <br />
+                    {votes && 
+                      <>
+                        <Title textTitle="Voting in process..." classType='admin-modal' />
+                        <br />
+                        <Title textTitle={"The votation expires in: "+expiration} classType="expiration-Contract" />
+                        <br />
+                        <Title textTitle={'Course: '+nameCourse} classType="modal-Course" />
+                        <Title textTitle={'Id: '+idCourse} classType="modal-Course" />
+                        <h2>The results till now are:</h2>
+                        {votes.map((result) => {
+                          let tempDate = Object.keys(result);
+                          let tempNum = Object.values(result);
+                          console.log("THE VALUS ARE: ",tempDate[0]);//[[[[[[[[[[[[[[]]]]]]]]]]]]]]
+                          return(
+                            <div className='container-Dates'>
+                              <span id="container-Results">{"Date: "+tempDate[0]+"   ->   Voters: "+tempNum}</span>
+                              <br />
+                              <br />
+                          
+                            </div>
+                          )
+                          
+                        })}
 
-                        </div>
-                      )
-                      
-                    })}
-
+                      </>
+                    }
+                  </>
+                  :
+                  <>
+                    <Title textTitle="The voting finished" classType='admin-modal' />
+                    <br />
+                    <Title textTitle={'Course: '+nameCourse} classType='data-course-Modal' />
+                    <Title textTitle={'Id: '+idCourse} classType='data-course-Modal' />
+                    <br />
+                    <Title textTitle={"The new Exam date is: "+ dateWinner} classType="voting-closed-Modal"/>
+                    <br/>
                   </>
                 }
               </>
-              :
-              <>
-                <Title textTitle="The voting finished" classType='admin-modal' />
-                <br />
-                <Title textTitle={"The new Exam date is: "+ dateWinner} classType="voting-closed-Modal"/>
-                <br/>
-              </>
             }
+
+            
             
         </div>
 

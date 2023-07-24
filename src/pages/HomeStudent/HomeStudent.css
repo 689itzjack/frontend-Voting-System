@@ -2,23 +2,36 @@
     display: flex;
     width: 100%;
     min-height: 92.8vh;
-    background-color: gainsboro;
+    background-color: white;
     margin: 0;
     padding: 0;
     margin-top: 40px;
 
 }
 
-.container-list{
+.container-list-Student{
     border: 10px;
     border-color: black;
+    background-color: white;    
 }
 
 .page-student aside{
     width: 30%;
     height: auto;
-    background-color: black;    
+    background-color: white;    
     border-right: solid rgba(181, 0, 0, 0.809);
+}
+
+.span-Up{
+    color: rgb(26, 92, 163);
+    font-size: 35px;
+    font-weight: 50;
+}
+
+.span-Down{
+    color: rgba(181, 0, 0, 0.809);
+    font-size: 30px;
+    font-weight: 50;
 }
 
 .container-main{

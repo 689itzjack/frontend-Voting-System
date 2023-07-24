@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { ADDED_COURSES, ERROR404_NOPAGE, NEWCOURSE, RES_COURSE } from '../../paths/pathsRoutes';
 import { AddCourse } from './sub-pages/AddCourse/AddCourse';
 import { ethers } from "ethers";
-//import minipic from './../../assets/images/azrieli.png'
+// import asidePic from './../../assets/images/voting.png'
 
 //import { FirstMain } from './sub-pages/FirstMain/FirstMain';
 import { useRef } from 'react';
@@ -52,20 +52,17 @@ export const HomeAdmin = () => {
 
     async function checking_Address_Metamask(){
 
-        
         if(window.ethereum !== "undefined"){
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();  
             if(userFromDB.adMeta !== signer.address){
-                alert("Dear User, Please active your Metamask account.");
+                alert("Dear User, Please active your Metamask account and then, refresh the page.");
             }
             else{
                 setCorrectAddress(true);
             }
         }
     }
-
-    
 
 ///////////////////////////////////////////// HANDLERS FUNCTIONS ///////////////////////////////////////////// 
 
@@ -166,10 +163,12 @@ export const HomeAdmin = () => {
     <div className='page-admin'>
         <NavbarUser typeUser="admin" clickedHome={setClickedButton} mainSHown={setMainShown} userFromDB={userFromDB} />
         <aside>
+            <br />
             <h1>Hi {userFromDB?.name}!<br/><br/> Welcome to the voting system</h1>
             <div className='container-list'>
                 <Lista adminData={userFromDB}/>
             </div>
+            {/* <img id='img-aside-Photo' src={asidePic} alt="aside photo" /> */}
         </aside>
 
         <main className='main-admin'>
@@ -178,7 +177,7 @@ export const HomeAdmin = () => {
             
                 <div className='Menu'>
                     <br/>
-                    <Title textTitle="Please choice an option:" classType="title-Admin" />
+                    <Title textTitle="Dear Admin, Please choice an option:" classType="title-Admin" />
                     <br/>
                     <br/>
                     <Button idButton="addCourse" text="Create a new course" classButton="admin-main-buttons" handlerFunction={handlerClick}/>

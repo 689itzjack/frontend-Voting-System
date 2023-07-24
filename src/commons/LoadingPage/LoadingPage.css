@@ -1,0 +1,25 @@
+.loader{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;/*coloca los elementos de este container en el centro de la pantalla del eje y*/
+    align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+    height: 100%;
+}
+
+.loader::after{
+    content: " ";
+    width: 75px;
+    height: 75px;
+    border: 15px solid rgb(95, 180, 254);
+    border-top-color:  red;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading{
+    from {transform: rotate(0turn)}
+    to {transform: rotate(1turn)}
+    
+}
