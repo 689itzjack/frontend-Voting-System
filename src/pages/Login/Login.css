@@ -4,9 +4,11 @@
     justify-content: center;/*todo el contenido dentro del flex se coloca en el centro de la pantalla*/
     align-items: center;/*cada item dentro del flex se coloca en el centro de la pantalla*/
 }
-img{
-    width: 150px;
+.img-photoAzr img{
+    width: 200px;
+    height: 160px;
     border-radius: 30px;
+    border: solid rgba(181, 0, 0, 0.809);
 }
 .label-pass-error{
     color: yellow;

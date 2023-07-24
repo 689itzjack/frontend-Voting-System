@@ -1,0 +1,101 @@
+.titleLabel{
+    
+    color: rgba(181, 0, 0, 0.809);
+    /* font-weight: bold; */
+    font-size:1.5rem;
+    font-family: monospace;
+
+}
+
+.title-Admin{
+    color: rgba(0, 0, 0, 0.692);
+    /* font-weight: bold; */
+    font-size:2rem;
+    font-family: monospace;
+    margin-left: -170px;
+}
+
+.title-addCourse{
+    color: black;
+    /* font-weight: bold; */
+    font-size:3rem;
+    font-family: monospace;
+}
+
+.title-selectCourse{
+    color: black;
+    font-size:2rem;
+    font-family: monospace;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.issuing-vote{
+    color: black;
+    font-weight: bold;
+    margin-left: 1.5rem;
+    font-size:2.1rem;
+    
+}
+
+.dataCourse-issuing-vote{
+    white-space:pre;
+    color: black;
+    font-size:1.5rem;
+    margin-left: 1.5rem;
+
+}
+.choice-issuing-vote{
+    margin-left: 2.1rem;
+    color: black;
+    font-size:1.2rem;
+}
+.confirmation-voting{
+    color: black;
+    font-size: 1.5rem;
+    padding-left: 1.5rem;
+    display: block;
+    /* margin-top: 200px; */
+}
+.important-note{
+    display: block;
+    color: rgb(146, 18, 18);
+    font-size: 1rem;
+    border: solid 3px #901111b0;
+    
+    
+}
+.expiration-Contract{
+    color:blue;
+    padding-left: 1.5rem;
+}
+
+.admin-addedCourses{
+    color: black;
+    font-size: xx-large;
+}
+.voting-closed{
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 1.8rem;
+}
+
+.admin-modal{
+    font-size: 31px;
+}
+.voting-closed-Modal{
+    color: black;
+    font-size: 1.5rem;
+}
+.load-Page{
+    color: black;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+}
+.data-course-Modal{
+    color: black;
+}
+.modal-Course{
+    margin-left: 25px;
+}

@@ -1,0 +1,17 @@
+////////////////////////////////////////////////////IDEAS////////////////////////////////////////////////////
+1:  hacer un boton con el cual el usuario admin pueda ver todos los cursos que hacer
+    agregado al systema
+2:  al momento de entrar en la pagina de "cursos agregados", tenemos la posibilidad de ver cual
+    es la fecha que ha ganado o si la votacion sigue en curso.
+3:  voy a modificar la pagina del admin de tal forma que al momento de que haga click en "added courses"
+    se muestren todos los cursos existentes en forma de bototones y si queremos ver los resultados de la
+    votacion de un curso, podemos oprimir el boton del curso. 
+4:  crear una ventana emergente la cual diga que curso el usuario admin a agregado 
+
+
+Paginas:
+
+http://www.falconmasters.com/web-design/tutorial-menu-de-navegacion-fijo/ ///nos ensenia como crear un navbar fijo
+https://geekflare.com/es/classy-css-hover-effects/ ////nos ensena a cambiar texto de botones y hover
+https://soliditytips.com/articles/solidity-dates-time-operations/ ///nos ensenia como convertir timestamps entre solidity y JS
+

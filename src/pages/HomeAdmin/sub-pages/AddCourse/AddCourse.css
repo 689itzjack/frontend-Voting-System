@@ -1,0 +1,17 @@
+.container-dates{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;/*coloca los elementos de este container en el centro de la pantalla del eje y*/
+    align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+}
+.admin-containerAddButtons{
+    display: flex;
+    justify-content: center;/*coloca los elementos de este container en el centro de la pantalla del eje y*/
+    /*align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+
+}

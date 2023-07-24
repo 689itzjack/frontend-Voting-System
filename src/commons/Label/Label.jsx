@@ -1,9 +1,9 @@
 import React from "react";
 import './Label.css';
 
-export function Label({text}){
+export function Label({text, classLabel}){
     return <div>
-        <label>{text}</label>
+        <label className={classLabel}>{text}</label>
         
     </div>
 };

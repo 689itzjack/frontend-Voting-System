@@ -23,3 +23,19 @@ yarn-debug.log*
 yarn-error.log*
  
 #carpets
+
+project requirements list
+Archivos-Sin-Uso
+project requirements list.docx
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+.secret

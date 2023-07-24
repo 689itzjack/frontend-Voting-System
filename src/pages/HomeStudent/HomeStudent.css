@@ -1,0 +1,68 @@
+.page-student{
+    display: flex;
+    width: 100%;
+    min-height: 92.8vh;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    margin-top: 40px;
+
+}
+
+.container-list-Student{
+    border: 10px;
+    border-color: black;
+    background-color: white;    
+}
+
+.page-student aside{
+    width: 30%;
+    height: auto;
+    background-color: white;    
+    border-right: solid rgba(181, 0, 0, 0.809);
+}
+
+.span-Up{
+    color: rgb(26, 92, 163);
+    font-size: 35px;
+    font-weight: 50;
+}
+
+.span-Down{
+    color: rgba(181, 0, 0, 0.809);
+    font-size: 30px;
+    font-weight: 50;
+}
+
+.container-main{
+    
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    height: auto;
+    padding-top: 1.5rem;
+
+}
+
+.container-courses{
+    margin: 0;
+    padding: 0;
+}
+
+.list-courses{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;/*coloca los elementos de este container en el centro de la pantalla del eje y*/
+    align-items: center;/*coloca los elementos de este container en el centro de la pantalla del eje x*/
+    
+}
+/* .nav-page{
+    height: 30px;
+    width: 100%;
+    background-color: rgba(181, 0, 0, 0.809);
+    padding: 5px;
+    /* display: block; */
+    /* justify-content: space-between;
+    border-bottom: solid black;
+    border-top: solid black;
+}  */

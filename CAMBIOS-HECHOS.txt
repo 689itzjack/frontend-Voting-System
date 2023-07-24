@@ -1,0 +1,40 @@
+//////////////////////////CAMBIOS ANTERIORES Y MEOJORAS DEL SISTEMA//////////////////////////
+
+Cambios Hechos
+
+1:  cambie el path de HOME (de HOME = /home/* a HOME = /) en el archivo "pathsRoutes" de la carpeta "paths"
+2:  en el archivo "homeAdmin" linea 64 hemos cambiado "if(!mainShown && pathname === "/home/*" a if(!mainShown && pathname === "/"){)"
+3:  he agregado la funcion "get_Votes()" que nos va a regresar todos los votos hechos por los estudiantes
+4:  he agregado la funcion "get_Date_Winner()" que nos retorna la fecha donde la mayoria votaron
+5:  cambie la funcion "issuing_Vote()" de tal forma que podamos hacer la transaccion de un jale y no tener que confirmar 3 veces para poder 
+    tramitar el voto.
+6:  hemos hecho que las flechas del browser junto con el refresh hagan efecto en nuestras paginas
+    de tal manera que si le damos atras o adelante a los botones del navegador y cambia la ruta 
+    del browser, la pagina tambien cambia deacuerdo a la ruta que se indica en el navegador.
+7:  he hecho un modal en la pagina "Courses Added" del admin al momento de abrir los resultados de un curso determinado
+8:  he cambiado el disenio de ambos usuarios
+9:  he puesto un spiner de tal forma que toda la informacion se cargue antes de ser renderizada al usuario
+
+
+
+
+
+Cambios por hacer
+
+1: checar que no se puedan meter  2 fechas iguales //X
+2: checar que el password tenga que concidir al abrir una cuenta nueva //V
+3: crear una ventana emergente la cual diga que curso el usuario admin se ha agregado //V
+4: checar que los botones no se muestren si el usuario no tiene activada su cuenta de metamask//X
+5: hacer que las paginas de ERROR se redirijan hacia la pagina de Home. //X
+6: al momento de cambiar las pags del admin con los botones o al recargar la pag, tenemos tambien que marcar en el 
+    navbar que la pagina ah cambiado // V
+7: quitar la contrasenia de la parte donde se guardan los datos en la DB de firebase. //X
+8: bloquear la pantalla cuando se haga logout en metamask
+
+agregaciones al proyecto
+
+1: ha beaya mbjinat handasa tojna
+2: 
+
+`12345678890-\][poiuytrewq  asdfghjkl;'
+';lkjhgfdsazxcvbnm,./?]

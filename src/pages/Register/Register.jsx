@@ -10,6 +10,7 @@ import './Register.css';
 import firebaseApp from './../../firebase/credentials';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { useEffect } from 'react';
 
 
 export const Register = () => {
@@ -17,13 +18,18 @@ export const Register = () => {
   const navigate = useNavigate();//borar/////////////////////////
   const auth = getAuth(firebaseApp);//contains an instance of the authentication firebase service
   const firestore = getFirestore(firebaseApp);//contains an instance of the firestore service.
-  //const [isLoged, setIsLoged] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [existError, setExistError] = useState(true);
+
+
 
   const [values, setValues] = useState({
     studentName: "",
     studentSurName: "",
     studentEmail: "",
-    password: "",
+    pass: "",
+    passwordReg2: "",
     studentPhone: "",
     addressMetamask: "",
   });
@@ -35,49 +41,82 @@ export const Register = () => {
       ...values,
       [nameCurrInput]: valueCurrInput,
     });
+    setEmailError(false);
+    setPassError(false);
   };
 
   const submitForm = (event) => {
     event.preventDefault();
-    //console.log(values);///////////////////////////////////////
-    registerUser();
-    //console.log(isLoged);////////////////////////////////////////////////////
-    //setLocalStorage();
-    navigate(HOME, {
-      replace: true,
-      state: {
-        logedIn: false,
+    //console.log("THE ANSWER IS: ", answer);
+    console.log("The value of the passwords is: ", values.pass.length , values.passwordReg2.length);
+
+    if((values.pass?.length >= 6) && (values.passwordReg2?.length >= 6)){
+
+      if((values.pass === values.passwordReg2)){
+        console.log("THE PASWORD IS CORRECT");//]]]]]]]]]]]]]]]]]]]]]]]
+        setPassError(false);
+        registerUser();
       }
-    });
-    
+      else{
+        setPassError(true);
+        setExistError(true);
+      }
+    }
+    else{
+      setPassError(true);
+      setExistError(true);
+    }
   };
 
   const doNothing = () => {}
 
-  // const setLocalStorage = () => {
-  //   try{
-  //   //console.log("EL VALOR BOOLEANO ES: "+isLoged );////////////////////////////////////////////////////
-  //     window.localStorage.setItem("isLoged", false);
-  //   }
-  //   catch(error){
-  //     console.error(error);
-  //   }
-  // }
-
   async function registerUser(){//This function will register an user in the authentication firebase service
 
     const currUser = await createUserWithEmailAndPassword(
-    auth, values.studentEmail, values.password).then((userInFirebase) =>{return userInFirebase;});
+    auth, values.studentEmail, values.pass).then((userInFirebase) =>{
+      console.log("USER CREATED!");//[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
+      setEmailError(false);
+      return userInFirebase;
+    }).catch((error) => {
+      setEmailError(true);
+      setExistError(true);
+      console.log(error);//[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
+      console.log("The email is already in use!");//[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
+
+    });
     //"currUser" variable will contains our user that we had suscribed to the firebase service authentication mediantly the function
     //"createUserWithEmailAndPassword" and after we had a promise "then" taht will return us the user suscribed.
     
-    console.log(currUser.user.uid);///////////////////////////////////////////////
+    //console.log(currUser.user.uid);///////////////////////////////////////////////
+    //if(!emailError && !passError){
+
+      const docRef = doc(firestore, `Users/${currUser.user.uid}`);//contains the specific document from firestore wher we saved the data
+      await setDoc(docRef, {name: values?.studentName,secName: values.studentSurName, email: values.studentEmail, phone: values.studentPhone,
+      adMeta: values.addressMetamask,pass: values.pass, rol: "student" });//here we write the data of the user in the database  
+      //setEmailError(false);
+      setExistError(false);
+      signOut(auth);
+    //}
     
-    const docRef = doc(firestore, `Users/${currUser.user.uid}`);//contains the specific document from firestore wher we saved the data
-    await setDoc(docRef, {name: values.studentName,secName: values.studentSurName, email: values.studentEmail, phone: values.studentPhone,
-    adMeta: values.addressMetamask,pass: values.password, rol: "student" });//here we write the data of the user in the database  
-    signOut(auth);
   }
+
+  useEffect(() => {
+  
+    if(emailError || passError){ 
+      setExistError(true);
+    }
+    
+    if(!existError){
+      alert("The user "+values.studentName+"has been added sucessfully.")
+      navigate(LOGIN, {
+        replace: true,
+        state: {
+          logedIn: false,
+        }
+      });
+    }
+
+  }, [passError, emailError, existError]);
     
 
   return (
@@ -112,6 +151,7 @@ export const Register = () => {
         />
         <br/>
         <br/>
+        {(emailError) && <span className='error-Pass'>The email is already in use, type another email.</span>}
         <Label text="Student e-mail."/>
         <Input 
           atributte={{
@@ -122,7 +162,7 @@ export const Register = () => {
             value: values.studentEmail,
           }}
           handlerCh = {handlerInput}
-          className = {false} 
+          param = {emailError} 
         />
         <br/>
         <br/>
@@ -156,13 +196,31 @@ export const Register = () => {
         <Label text="Password"/>
         <Input 
           atributte={{
-            id: "password",
-            name: "password",
+            id: "pass",
+            name: "pass",
             placeHolder: "Please write a password.",
-            value: values.password,
+            value: values.pass,
+            type: "password",
           }}
           handlerCh = {handlerInput}
           className = {false} 
+        />
+        <br/>
+        <br/>
+
+        {(passError) && <span className='error-Pass'>The password not matched</span>}
+
+        <Label text="Confirm Password"/>
+        <Input 
+          atributte={{
+            id: "passwordReg2",
+            name: "passwordReg2",
+            placeHolder: "Please confirm the password.",
+            value: values.passwordReg2,
+            type: "password",
+          }}
+          handlerCh = {handlerInput}
+          param = {passError} 
         />
         <br/>
         <br/>

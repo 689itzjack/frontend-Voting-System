@@ -1,0 +1,32 @@
+.list-user{
+
+    margin: 20px;
+    padding: 10px;
+    border-radius: 6px;
+    /* border-style: groove solid; */
+    border-top: solid rgba(181, 0, 0, 0.809);
+    border-right: solid black;
+    /* background-color: white; */
+    
+    /* font-weight: 100; */
+}
+
+.list-user span{
+    color: #b41e1e;
+    font-weight: 50;
+}
+
+#title{
+    font-weight: 50;
+    font-size: xx-large;   
+    color: black; 
+}
+
+.list-user .span-List-Side{
+    color: black;
+}
+
+.meta-Adrs{
+    font-size:x-small;
+}
+/* gainsboro */

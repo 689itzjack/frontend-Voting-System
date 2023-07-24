@@ -3,14 +3,35 @@
     margin-right: 20px;
     padding: 5px;
     border-radius: 10px;
-    border-color: white;
-    background-color: black;
-    color: red;
+    border-color: black;
+    background-color: white;
+    color: #b41e1e;
+    font-weight: 600;
     cursor:pointer;
 }
 
 .loginButton, .registerButton{
     width: 20%;
+    height: 30px;
+    color: rgb(26, 92, 163);
+    font-weight: 700;
+    border-radius: 10px;
+    border-color: rgb(26, 92, 163);
+    background-color: white;
+    cursor:pointer;
+}
+.admin-main-buttons{
+    width: 300px;
+    height: 60px;
+    color: #b41e1e;
+    border-radius: 10px;
+    border-color: black;
+    background-color: white;
+    cursor:pointer;
+    font-size: 20px;
+}
+.admin-addCourseButton{
+    width: 100px;
     height: 30px;
     color: white;
     border-radius: 10px;
@@ -18,4 +39,128 @@
     background-color: black;
     cursor:pointer;
 }
+.buttonStudent-Course{
+    width: 500px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #a31c1c;;
+    border-radius: 10px;
+    border-color: rgb(26, 92, 163);
+    background-color: white;
+    white-space:pre;
+    cursor:pointer;
+}
+.student-buttonsDates{
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    color: #a31c1c;
+    border-radius: 10px;
+    border-color: #ffffff;
+    background-color: black;
+    font-weight:600;
+    cursor:pointer;
+}
+.cancel-vote{
+    margin-left: 15rem;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    color: #ff1c1cb0;
+    border-radius: 10px;
+    border-color: #ffffff;
+    background-color: black;
+    font-weight:400;
+    cursor:pointer;
+}
+.confirm-vote{
+    margin-left: 5rem;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    border-radius: 10px;
+    border-color: #ffffff;
+    background-color: black;
+    font-weight:400;
+    cursor:pointer;
+}
 
+.admin-addedCoursesButtons{
+    width: 500px;
+    height: 40px;
+    font-size: 22px;
+    color: #b41e1e;
+    border: solid 2px;
+    border-radius: 10px;
+    border-color: #1a5ca2;
+    background-color: white;
+    font-weight:300;
+    cursor:pointer;
+    white-space:pre;
+
+}
+
+.button-NavbarHome{
+    width: 60px;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+}
+.button-NavbarHome:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarHome:focus{
+    text-decoration: underline;
+}
+
+
+.button-NavbarNewCourse{
+    width: 100px;
+    height: 30px;
+    margin-left: 8px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+}
+.button-NavbarNewCourse:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarNewCourse:focus{
+    text-decoration: underline;
+}
+
+
+
+.button-NavbarResults{
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 18px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    font-family:  monospace ;
+    font-size: x-large;
+    text-align: center;
+    color: gainsboro;
+    
+}
+.button-NavbarResults:hover {
+    color: #ff1c1cb0;
+}
+.button-NavbarResults:focus{
+    text-decoration: underline;
+}
